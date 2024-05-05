@@ -1,0 +1,131 @@
+@import '../../base/base';
+body.dark {
+  .widget {
+    &.widget-seven {
+        padding: 22px 18px;
+        background: #0e1726;
+    
+        .widget-heading {
+          h6 {
+            color: #e0e6ed;
+            margin-bottom: 25px;
+            font-size: 17px;
+            display: block;
+            font-weight: 600;
+          }
+    
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0;
+    
+          .task-action svg {
+            color: #888ea8;
+            width: 19px;
+            height: 19px;
+          }
+        }
+    
+        .w-chart {
+    
+          .w-chart-section {
+            display: flex;
+            width: 100%;
+            
+            .w-chart-render-one {
+              width: 32%;
+
+              .icon {
+                display: flex;
+                height: 50px;
+                width: 50px;
+                background: #000;
+                border-radius: 50%;
+                justify-content: center;
+                margin: 0 auto;
+
+                svg {
+                  align-self: center;
+                  width: 30px;
+                  height: 30px;
+                }
+              }
+            }
+            
+            &.t-visits {
+              margin-bottom: 23px;
+              .w-chart-render-one {
+                .icon {
+                  background: #e2a03f;
+                  color: #fff;
+                }
+              }
+              .w-detail {
+                .w-stats {
+                  color: #e2a03f;
+                }
+              }
+            }
+            &.p-visits {
+              .w-chart-render-one {
+                .icon {
+                  background: #00ab55;
+                  color: #fff;
+                }
+              }
+              .w-detail {
+                .w-stats {
+                  color: #00ab55;
+                }
+              }
+            }
+            
+            .w-detail {
+              // position: absolute;
+              color: #fff;
+              width: 50%;
+              align-self: center;
+            }
+    
+            .w-title {
+              // font-size: 13px;
+              // font-weight: 700;
+              // margin-bottom: 0;
+              // color: #515365;
+
+              font-size: 15px;
+              font-weight: 500;
+              margin-bottom: 0;
+              color: #e0e6ed;
+            }
+    
+            .w-stats {
+              color: #f8538d;
+              font-size: 20px;
+              letter-spacing: 1px;
+              margin-bottom: 0;
+              font-weight: 600;
+            }
+          }
+        }
+    }
+  }
+
+  @media (max-width: 575px) {
+
+
+    .widget {
+      &.widget-seven {
+        .w-chart {
+          .w-chart-section {
+            .w-chart-render-one {
+              width: 20%;
+              margin-right: 27px;
+            }
+          }
+        }
+      }      
+    }
+    
+  }
+
+}

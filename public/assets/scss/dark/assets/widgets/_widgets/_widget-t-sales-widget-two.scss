@@ -1,0 +1,116 @@
+@import '../../base/base';
+
+body {
+  &.dark {
+    
+    .widget-t-sales-widget {
+      // background-color: transparent;
+    
+      .media .icon {
+        background: #000;
+        border-radius: 50%;
+        padding: 10px;
+        color: #fff;
+      }
+    
+      &.widget-m-sales .media .icon {
+        background: #805dca;
+        color: #fff;
+      }
+    
+      &.widget-m-orders .media .icon {
+        background: #4361ee;
+        color: #fff;
+      }
+    
+      &.widget-m-customers .media .icon {
+        background: #e7515a;
+        color: #fff;
+      }
+    
+      &.widget-m-income .media .icon {
+        background: #00ab55;
+        color: #fff;
+      }
+    
+      .media {
+        .icon {
+          &.sales {}
+    
+          svg {
+            width: 30px;
+            height: 30px;
+            stroke-width: 1.5;
+          }
+        }
+    
+        .media-body {
+          align-self: center;
+          text-align: right;
+    
+          .widget-text {
+            font-size: 20px;
+    
+            /* text-align: right; */
+            margin-bottom: 0;
+          }
+        }
+      }
+    
+      &.widget-m-sales .media .media-body .widget-text {
+        color: #805dca;
+      }
+    
+      &.widget-m-orders .media .media-body .widget-text {
+        color: #4361ee;
+      }
+    
+      &.widget-m-customers .media .media-body .widget-text {
+        color: #e7515a;
+      }
+    
+      &.widget-m-income .media .media-body .widget-text {
+        color: #00ab55;
+      }
+    
+      .widget-numeric-value {
+        /* text-align: center; */
+        font-size: 22px;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    
+      .widget-total-stats {
+        margin-bottom: 0;
+        margin-top: 12px;
+        font-size: 15px;
+      }
+    }
+    
+    // body.dark .widget-t-sales-widget {
+    //   &.widget-m-sales .media .icon {
+    //     background: #805dca;
+    //     color: #fff;
+    //   }
+    
+    //   &.widget-m-orders .media .icon {
+    //     background: #4361ee;
+    //     color: #fff;
+    //   }
+    
+    //   &.widget-m-customers .media .icon {
+    //     background: #e7515a;
+    //     color: #fff;
+    //   }
+    
+    //   &.widget-m-income .media .icon {
+    //     background: #00ab55;
+    //     color: #fff;
+    //   }
+    // }
+    
+    
+    
+    
+  }
+}
