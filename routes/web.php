@@ -28,9 +28,12 @@ Route::name('front.')->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 });
 
-Route::prefix('/admin')->name('admin.')->group(function () {
+Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('index');
 });
 
 //auth
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'loginShow'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

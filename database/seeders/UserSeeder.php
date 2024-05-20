@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::query()->create([
-            'first_name' => 'Orxan',
-            'last_name' => 'Ismayılov',
+            'name' => 'Orxan',
+            'surname' => 'Ismayılov',
             'email' => 'orxanismayilov851@gmail.com',
             'password' => bcrypt('Admin!123'),
             'bio' =>    'Backend PHP/Laravel Developer kimi e-ticarət, blog, cms və s. Platformaları üçün
