@@ -1,16 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-//front
-use App\Http\Controllers\Front\HomeController;
-use App\Http\Controllers\Front\ProjectController;
-use App\Http\Controllers\Front\BlogController;
-use App\Http\Controllers\Fornt\ContactController;
-//admin
-use App\Http\Controllers\Admin\DashboardController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
-
+//admin
+use App\Http\Controllers\Admin\DashboardController;
+//front
+use App\Http\Controllers\Front\BlogController;
+use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProjectController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::name('front.')->group(function () {
