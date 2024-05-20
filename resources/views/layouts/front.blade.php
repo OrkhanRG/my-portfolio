@@ -48,23 +48,23 @@
         <div class="inner-box text-center">
             <div class="cross-icon"><span class="fa fa-times"></span></div>
             <div class="title">
-                <h4>Get Appointment</h4>
+                <h4>Mənimlə Əlaqə</h4>
             </div>
 
             <!--Appointment Form-->
             <div class="appointment-form">
-                <form method="post" action="contact.html">
+                <form method="post" action="{{ route('front.contact') }}">
                     <div class="form-group">
-                        <input type="text" name="text" value="" placeholder="Name" required>
+                        <input type="text" name="text" value="" placeholder="Ad Soyad" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" value="" placeholder="Email Address" required>
+                        <input type="email" name="email" value="" placeholder="Email ünvan" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Message" rows="5"></textarea>
+                        <textarea placeholder="Mesajınız" rows="5"></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="theme-btn">Submit now</button>
+                        <button type="submit" class="theme-btn">Göndər</button>
                     </div>
                 </form>
             </div>

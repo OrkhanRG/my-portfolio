@@ -5,7 +5,7 @@
 
             <div class="header-inner rel d-flex align-items-center">
                 <div class="logo-outer">
-                    <div class="logo"><a href="index.html"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo" title="Logo"></a></div>
+                    <div class="logo"><a href="{{ route('front.index') }}"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo" title="Logo"></a></div>
                 </div>
 
                 <div class="nav-outer clearfix mx-auto">
@@ -13,7 +13,7 @@
                     <nav class="main-menu navbar-expand-lg">
                         <div class="navbar-header">
                             <div class="mobile-logo my-15">
-                                <a href="index.html">
+                                <a href="{{ route('front.index') }}">
                                     <img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo" title="Logo">
                                 </a>
                             </div>
@@ -28,23 +28,10 @@
 
                         <div class="navbar-collapse collapse clearfix">
                             <ul class="navigation clearfix">
-                                <li><a href=#>Anasəhifə</a></li>
-                                <li><a href="about.html">Haqqımda</a></li>
-                                <li><a href="services.html">Xidmətlər</a></li>
-                                <li class="dropdown"><a href="#">Layihələr</a>
-                                    <ul>
-                                        <li><a href="projects.html">project Grid</a></li>
-                                        <li><a href="projects-masonry.html">projects masonry</a></li>
-                                        <li><a href="project-details.html">projects details</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown"><a href="#">Blog</a>
-                                    <ul>
-                                        <li><a href="blog.html">blog standard</a></li>
-                                        <li><a href="blog-details.html">blog details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Əlaqə</a></li>
+                                <li><a href={{ route('front.index') }}>Anasəhifə</a></li>
+                                <li><a href={{ route('front.projects') }}>Layihələr</a></li>
+                                <li><a href={{ route('front.blogs') }}>Bloglar</a></li>
+                                <li><a href="{{ route('front.contact') }}">Əlaqə</a></li>
                             </ul>
                         </div>
 

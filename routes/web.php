@@ -1,22 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//front
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProjectController;
+use App\Http\Controllers\Front\BlogController;
+use App\Http\Controllers\Fornt\ContactController;
+//admin
 use App\Http\Controllers\Admin\DashboardController;
+//auth
+use App\Http\Controllers\Auth\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::prefix('/admin')->name('admin.')->group(function (){
+Route::name('front.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+
+    //projects
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+    Route::get('/project-details/{slug}', [ProjectController::class, 'projectDetails'])->name('project-details');
+
+    //blogs
+    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+    Route::get('/blog-details/', [BlogController::class, 'blogDetails'])->name('blog-details');
+
+    //contact
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+});
+
+Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('index');
 });
+
+//auth
+Route::get('/login', [AuthController::class, 'login'])->name('login');

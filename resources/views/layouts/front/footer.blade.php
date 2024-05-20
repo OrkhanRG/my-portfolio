@@ -11,30 +11,28 @@
                 </div>
                 <div class="col-lg-7 col-md-7">
                     <div class="footer-widget widget_nav_menu wow fadeInUp delay-0-4s">
-                        <h6 class="footer-title">Quick Link</h6>
+                        <h6 class="footer-title">Sürətli Keçid</h6>
                         <ul>
-                            <li><a href="services.html">Service</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="services.html#pricing">Pricing</a></li>
-                            <li><a href="about.html#faqs">Faqs</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="services.html">Xidmətlər</a></li>
+                            <li><a href="projects.html">Layihələr</a></li>
+                            <li><a href="contact.html">Əlaqə</a></li>
                         </ul>
                     </div>
                     <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
                         <form action="#">
                             <label for="email-address"><i class="far fa-envelope"></i></label>
-                            <input id="email-address" type="email" placeholder="Email Address" required>
-                            <button>Sign Up <i class="far fa-angle-right"></i></button>
+                            <input id="email-address" type="email" placeholder="Email Ünvan" required>
+                            <button>Abunə Ol <i class="far fa-angle-right"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-widget widget_contact_info wow fadeInUp delay-0-6s">
-                        <h6 class="footer-title">Address</h6>
+                        <h6 class="footer-title">Ünvan</h6>
                         <ul>
-                            <li><i class="far fa-map-marker-alt"></i> 55 Main Street, 2nd block, New York City</li>
-                            <li><i class="far fa-envelope"></i> <a href="mailto:support@gmail.com">support@gmail.com</a></li>
-                            <li><i class="far fa-phone"></i> <a href="callto:+880(123)45688">+880 (123) 456 88</a></li>
+                            <li><i class="far fa-map-marker-alt"></i> Mustafa Topçubaşov 21A, Azərbaycan Bakı</li>
+                            <li><i class="far fa-envelope"></i> <a href="mailto:orxanismayilov851@gmail.com">orxanismayilov851@gmail.com</a></li>
+                            <li><i class="far fa-phone"></i> <a href="callto:+994(55)8783700">+994 (55) 878 37 00</a></li>
                         </ul>
                     </div>
                 </div>

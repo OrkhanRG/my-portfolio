@@ -12,12 +12,12 @@
             <div class="row align-items-center">
                 <div class="col-lg-4 col-sm-7">
                     <div class="hero-content rmb-55 wow fadeInUp delay-0-2s">
-                        <span class="h2">Hello, i’m </span>
-                        <h1><b>Roy C. Jones</b> web designer</h1>
-                        <p>We denounce with righteous indignation dislike demoralized by the charms of pleasure</p>
+                        <span class="h2">Salam, mən </span>
+                        <h1><b>Orxan İsmayılov</b> PHP Laravel Developer</h1>
+                        <p>PHP və Laravel frameworkü vasitəsilə web saytlar yazmağı sevən biri ;)</p>
                         <div class="hero-btns">
-                            <a href="contact.html" class="theme-btn">Hire Me <i class="far fa-angle-right"></i></a>
-                            <a href="contact.html" class="read-more">Download Resume <i class="far fa-angle-right"></i></a>
+                            <a href="contact.html" class="theme-btn">Məni işə götür <i class="far fa-angle-right"></i></a>
+                            <a href="contact.html" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -25,15 +25,15 @@
                     <div class="hero-counter-wrap ms-lg-auto rmb-55 wow fadeInUp delay-0-4s">
                         <div class="counter-item counter-text-wrap">
                             <span class="count-text plus" data-speed="3000" data-stop="13">0</span>
-                            <span class="counter-title">Years Of Experience</span>
+                            <span class="counter-title">İllik Təcrübə</span>
                         </div>
                         <div class="counter-item counter-text-wrap">
                             <span class="count-text k-plus" data-speed="3000" data-stop="8">0</span>
-                            <span class="counter-title">Project Complete</span>
+                            <span class="counter-title">Layihə Tamamlandı</span>
                         </div>
                         <div class="counter-item counter-text-wrap">
                             <span class="count-text percent" data-speed="3000" data-stop="99">0</span>
-                            <span class="counter-title">Client Satisfactions</span>
+                            <span class="counter-title">Müştəri Məmnuniyyəti</span>
                         </div>
                     </div>
                 </div>
@@ -67,13 +67,17 @@
                     <div class="col-lg-7">
                         <div class="about-content-part rel z-2 rmb-55">
                             <div class="section-title mb-35 wow fadeInUp delay-0-2s">
-                                <span class="sub-title mb-15">About Me</span>
-                                <h2>Professional <span>Problem Solutions</span> For Digital Products</h2>
-                                <p>At vero eos et accusamus etodio dignissimos ducimus praesentium voluptatum corrupti quos dolores quas molestias excepturi sint occaecati cupiditate provident qui officia deserunt mollitia animi, id est laborum et dolorum</p>
+                                <span class="sub-title mb-15">Haqqımda</span>
+                                <h2>Saytlar Üçün Professional <span>Problem Həlləri</span></h2>
+                                <p>Backend PHP/Laravel Developer kimi e-ticarət, blog, cms və s. Platformaları üçün
+                                    yüksək keyfiyyətli və davamlı proqram təminatının işlənib hazırlanmasında təcrübəm
+                                    var. PHP, Laravel, JavaScript-də texniki biliklərim, problem həll etmə bacarıqlarım
+                                    və komanda ilə əməkdaşlıq bacarıqlarımla birlikdə sistemin səmərəliliyi və
+                                    istifadəçi cəlb edilməsində əhəmiyyətli rolum var.</p>
                             </div>
                             <ul class="list-style-one two-column wow fadeInUp delay-0-2s">
-                                <li>Branding & Design</li>
-                                <li>Digital Marketing</li>
+                                <li>Brendinq & Dizayn</li>
+                                <li>Rəqəmsal Marketinq</li>
                                 <li>Web Development</li>
                                 <li>Product Design</li>
                             </ul>
@@ -81,15 +85,15 @@
                                 <div class="info-box-item">
                                     <i class="far fa-envelope"></i>
                                     <div class="content">
-                                        <span>Email Us</span><br>
-                                        <a href="mailto:support@gmail.com">support@gmail.com</a>
+                                        <span>Email</span><br>
+                                        <a href="mailto:support@gmail.com">orxanismayilov851@gmail.com</a>
                                     </div>
                                 </div>
                                 <div class="info-box-item">
                                     <i class="far fa-phone"></i>
                                     <div class="content">
-                                        <span>Make A Call</span><br>
-                                        <a href="callto:+000(123)45688">+880 (123) 456 88</a>
+                                        <span>Telefon</span><br>
+                                        <a href="callto:+994(55)8783700">+994-(55)-878-37-00</a>
                                     </div>
                                 </div>
                             </div>
@@ -100,12 +104,12 @@
                             <img src="{{ asset('assets/images/about/about.jpg') }}" alt="About Me">
                             <div class="about-btn btn-one wow fadeInRight delay-0-4s">
                                 <img src="{{ asset('assets/images/about/btn-image1.png') }}" alt="Image">
-                                <h6>Experience Designer</h6>
+                                <h6>Web Developer</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="about-btn btn-two wow fadeInRight delay-0-5s">
                                 <img src="{{ asset('assets/images/about/btn-image2.png') }}" alt="Image">
-                                <h6>Mark J. Collins</h6>
+                                <h6>Orxan İsmayılov</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="dot-shape">
@@ -140,8 +144,8 @@
                     <div class="row">
                         <div class="col-xl-8 col-lg-9">
                             <div class="section-title mb-60 wow fadeInUp delay-0-2s">
-                                <span class="sub-title mb-15">My Resume</span>
-                                <h2>Real <span>Problem Solutions</span> Experience</h2>
+                                <span class="sub-title mb-15">CV</span>
+                                <h2><span>Real</span> Təcrübə</h2>
                             </div>
                         </div>
                     </div>
@@ -153,7 +157,7 @@
                                         <i class="far fa-arrow-right"></i>
                                     </div>
                                     <div class="content">
-                                        <span class="years">2021 - Present</span>
+                                        <span class="years">2021 - Davam Edir</span>
                                         <h4>Lead Product Designer</h4>
                                         <span class="company">Google</span>
                                     </div>
@@ -217,8 +221,8 @@
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-8">
                     <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                        <span class="sub-title mb-15">Popular Services</span>
-                        <h2>My <span>Special Service</span> For your Business Development</h2>
+                        <span class="sub-title mb-15">Xidmətlər</span>
+                        <h2>Biznesinizin İnkişafı Üçün <span>Xüsusi Xidmətlərim</span></h2>
                     </div>
                 </div>
             </div>
@@ -304,11 +308,11 @@
                     <div class="col-lg-5">
                         <div class="skill-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
                             <div class="section-title mb-40">
-                                <span class="sub-title mb-15">My Skills</span>
-                                <h2>Let’s Explore Popular <span>Skills & Experience</span></h2>
-                                <p>Sed ut perspiciatis unde omnis iste natus to voluptatem accusantium doloremque laudantium, totam rem aperiamc eaque ipsa quae ab illo inventore veritatis</p>
+                                <span class="sub-title mb-15">Bacarıqlar</span>
+                                <h2>Populyar <span>Bacarıqlar və Təcrübələrim</span></h2>
+                                <p>Bu bölmədə istifadə etdiyim populyar bacarıqlarımı görə bilər və haqqımda daha çox məlumat üçün aşağıdakı <b>Daha Ətraflı</b> düyməsinə sıxa bilərsiz </p>
                             </div>
-                            <a href="about.html" class="theme-btn">Learn More <i class="far fa-angle-right"></i></a>
+                            <a href="about.html" class="theme-btn">Daha Ətraflı <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -345,7 +349,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-2s">
                                         <img src="{{ asset('assets/images/skills/skill5.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
+                                        <h5>Angular</h5>
                                         <span class="percent">65%</span>
                                     </div>
                                 </div>
@@ -359,7 +363,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-4s">
                                         <img src="{{ asset('assets/images/skills/skill7.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
+                                        <h5>Python</h5>
                                         <span class="percent">62%</span>
                                     </div>
                                 </div>
@@ -393,8 +397,8 @@
             <div class="row justify-content-center">
                 <div class="col-xl-12">
                     <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                        <span class="sub-title mb-15">Latest Works</span>
-                        <h2>Explore My Popular <span>Projects</span></h2>
+                        <span class="sub-title mb-15">Sonuncu Layihələrim</span>
+                        <h2>Populyar <span>Layihələrimi</span> Araşdırın </h2>
                     </div>
                 </div>
             </div>
@@ -459,7 +463,7 @@
                 </div>
             </div>
             <div class="project-btn text-center wow fadeInUp delay-0-2s">
-                <a href="projects.html" class="theme-btn">View More Projects <i class="far fa-angle-right"></i></a>
+                <a href="projects.html" class="theme-btn">Daha çox layihəyə baxın <i class="far fa-angle-right"></i></a>
             </div>
         </div>
         <div class="bg-lines">
@@ -473,167 +477,6 @@
     <!-- Projects Area end -->
 
 
-    <!-- Testimonial Area start -->
-    <section class="testimonials-area rel z-1">
-        <div class="for-bgc-black py-130 rpy-100">
-            <div class="container">
-                <div class="row gap-90">
-                    <div class="col-lg-4">
-                        <div class="testimonials-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
-                            <div class="section-title mb-40">
-                                <span class="sub-title mb-15">Clients Testimonials</span>
-                                <h2>I’ve 1253+ Clients <span>Feedback</span></h2>
-                                <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis</p>
-                            </div>
-                            <div class="slider-arrows">
-                                <button class="testimonial-prev"><i class="fal fa-arrow-left"></i></button>
-                                <button class="testimonial-next"><i class="fal fa-arrow-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="testimonials-wrap">
-                            <div class="testimonial-item wow fadeInUp delay-0-3s">
-                                <div class="author">
-                                    <img src="{{ asset('assets/images/testimonials/author1.png') }}" alt="Author">
-                                </div>
-                                <div class="text">At vero eoset accusamus et iusto odio dignissimos ducimus quie blanditiis praesentium voluptatum deleniti atque corrupti dolores</div>
-                                <div class="testi-des">
-                                    <h5>Rodolfo E. Shannon</h5>
-                                    <span>CEO & Founder</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-item wow fadeInUp delay-0-4s">
-                                <div class="author">
-                                    <img src="{{ asset('assets/images/testimonials/author2.png') }}" alt="Author">
-                                </div>
-                                <div class="text">Nam libero tempore cumsoluta nobise est eligendi optio cumque nihil impedit quominus idquod maxime placeat facere possimus</div>
-                                <div class="testi-des">
-                                    <h5>Kenneth J. Dutton</h5>
-                                    <span>Web Developer</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-item wow fadeInUp delay-0-2s">
-                                <div class="author">
-                                    <img src="{{ asset('assets/images/testimonials/author1.png') }}" alt="Author">
-                                </div>
-                                <div class="text">At vero eoset accusamus et iusto odio dignissimos ducimus quie blanditiis praesentium voluptatum deleniti atque corrupti dolores</div>
-                                <div class="testi-des">
-                                    <h5>Rodolfo E. Shannon</h5>
-                                    <span>CEO & Founder</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-item wow fadeInUp delay-0-2s">
-                                <div class="author">
-                                    <img src="{{ asset('assets/images/testimonials/author2.png') }}" alt="Author">
-                                </div>
-                                <div class="text">Nam libero tempore cumsoluta nobise est eligendi optio cumque nihil impedit quominus idquod maxime placeat facere possimus</div>
-                                <div class="testi-des">
-                                    <h5>Kenneth J. Dutton</h5>
-                                    <span>Web Developer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
-    </section>
-    <!-- Testimonial Area end -->
-
-
-    <!-- Pricing Area start -->
-    <section class="pricing-area pt-130 rpt-100 rel z-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-12">
-                    <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                        <span class="sub-title mb-15">Pricing Package</span>
-                        <h2>Amazing <span>Pricing</span> For your Projects</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6">
-                    <div class="pricing-item wow fadeInUp delay-0-2s">
-                        <div class="pricing-header">
-                            <h4 class="title">Basic Plan</h4>
-                            <p class="save-percent">Try Out Basic Plan Save <span>20%</span></p>
-                            <span class="price">19.95</span>
-                        </div>
-                        <div class="pricing-details">
-                            <p>Sed perspiciatis unde natus totam see rem aperiam eaque inventore</p>
-                            <ul>
-                                <li>Website Design</li>
-                                <li>Mobile Apps Design</li>
-                                <li>Product Design</li>
-                                <li class="unable">Digital Marketing</li>
-                                <li class="unable">Custom Support</li>
-                            </ul>
-                            <a href="contact.html" class="theme-btn">Choose Package <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="pricing-item wow fadeInUp delay-0-4s">
-                        <div class="pricing-header">
-                            <h4 class="title">Standard Plan</h4>
-                            <p class="save-percent">Try Out Basic Plan Save <span>35%</span></p>
-                            <span class="price">19.95</span>
-                        </div>
-                        <div class="pricing-details">
-                            <p>Sed perspiciatis unde natus totam see rem aperiam eaque inventore</p>
-                            <ul>
-                                <li>Website Design</li>
-                                <li>Mobile Apps Design</li>
-                                <li>Product Design</li>
-                                <li>Digital Marketing</li>
-                                <li>Custom Support</li>
-                            </ul>
-                            <a href="contact.html" class="theme-btn">Choose Package <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="pricing-item wow fadeInUp delay-0-6s">
-                        <div class="pricing-header">
-                            <h4 class="title">Basic Plan</h4>
-                            <p class="save-percent">Try Out Basic Plan Save <span>45%</span></p>
-                            <span class="price">19.95</span>
-                        </div>
-                        <div class="pricing-details">
-                            <p>Sed perspiciatis unde natus totam see rem aperiam eaque inventore</p>
-                            <ul>
-                                <li>Website Design</li>
-                                <li>Mobile Apps Design</li>
-                                <li>Product Design</li>
-                                <li>Digital Marketing</li>
-                                <li>Custom Support</li>
-                            </ul>
-                            <a href="contact.html" class="theme-btn">Choose Package <i class="far fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
-    </section>
-    <!-- Pricing Area end -->
-
-
     <!-- Contact Area start -->
     <section class="contact-area pt-95 pb-130 rpt-70 rpb-100 rel z-1">
         <div class="container">
@@ -641,15 +484,15 @@
                 <div class="col-lg-4">
                     <div class="contact-content-part pt-5 rpt-0 rmb-55 wow fadeInUp delay-0-2s">
                         <div class="section-title mb-40">
-                            <span class="sub-title mb-15">Get In Touch</span>
-                            <h2>Let’s Talk For your <span>Next Projects</span></h2>
-                            <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis</p>
+                            <span class="sub-title mb-15">Mənimlə Əlaqə Saxla</span>
+                            <h2><span>Növbəti Layihələriniz</span> Üçün Mənimlə Danışın </h2>
+                            <p>Sağ tərəfdə olan formu dolduraraq mənimlə əlaqə saxlaya bilərsiz.</p>
                         </div>
                         <ul class="list-style-two">
-                            <li>5+ Years Of Experience</li>
+                            <li>5+ İllik Təcrübə</li>
                             <li>Professional Web Designer</li>
                             <li>Mobile Apps Design</li>
-                            <li>Custom Design Support</li>
+                            <li>Xüsusi Dizayn Dəstəyi</li>
                         </ul>
                     </div>
                 </div>
@@ -659,46 +502,46 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Full Name</label>
-                                        <input type="text" id="name" name="name" class="form-control" value="" placeholder="Richard D. Hammond" required data-error="Please enter your Name">
+                                        <label for="name">Ad Soyad</label>
+                                        <input type="text" id="name" name="name" class="form-control" value="" placeholder="Ad Soyad" required data-error="Please enter your Name">
                                         <label for="name" class="for-icon"><i class="far fa-user"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="support@gmail.com" required data-error="Please enter your Email">
+                                        <label for="email">E-mail </label>
+                                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="E-mail ünvanınız" required data-error="Please enter your Email">
                                         <label for="email" class="for-icon"><i class="far fa-envelope"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="phone_number">Phone Number</label>
-                                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="+880 (123) 456 88" required data-error="Please enter your Phone Number">
+                                        <label for="phone_number">Telefon </label>
+                                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="Telefon Nömrəniz" required data-error="Please enter your Phone Number">
                                         <label for="phone_number" class="for-icon"><i class="far fa-phone"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="subject">Subject</label>
-                                        <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Subject" required data-error="Please enter your Subject">
+                                        <label for="subject">Başlıq</label>
+                                        <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Başlıq" required data-error="Please enter your Subject">
                                         <label for="subject" class="for-icon"><i class="far fa-text"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="write message" required data-error="Please enter your Message"></textarea>
+                                        <label for="message">Mesajınız</label>
+                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="Mesaj Yazın" required data-error="Please enter your Message"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group mb-0">
-                                        <button type="submit" class="theme-btn">Send Us Message <i class="far fa-angle-right"></i></button>
+                                        <button type="submit" class="theme-btn"> Mesaj Göndərin <i class="far fa-angle-right"></i></button>
                                         <div id="msgSubmit" class="hidden"></div>
                                     </div>
                                 </div>
@@ -726,8 +569,8 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-12">
                         <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                            <span class="sub-title mb-15">News & Blog</span>
-                            <h2>Latest News & <span>Blog</span></h2>
+                            <span class="sub-title mb-15">Xəbərlər & Blog</span>
+                            <h2>Ən Son Xəbərlər & <span>Blog</span></h2>
                         </div>
                     </div>
                 </div>
@@ -787,7 +630,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-12">
                     <div class="section-title text-center pt-5 mb-65 wow fadeInUp delay-0-2s">
-                        <h6>I’ve <span>1253+ Global Clients</span> & lot’s of Project Complete</h6>
+                        <h6>İşlədiyim <span>Şirkətlər</span></h6>
                     </div>
                 </div>
             </div>
