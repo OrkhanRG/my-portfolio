@@ -13,11 +13,11 @@
                 <div class="col-lg-4 col-sm-7">
                     <div class="hero-content rmb-55 wow fadeInUp delay-0-2s">
                         <span class="h2">Salam, mən </span>
-                        <h1><b>Orxan İsmayılov</b> PHP Laravel Developer</h1>
-                        <p>PHP və Laravel frameworkü vasitəsilə web saytlar yazmağı sevən biri ;)</p>
+                        <h1><b>{{ $user->name.' '.$user->surname }}</b> {{ $about->specialty }}</h1>
+                        <p>{{ $about->short_description }}</p>
                         <div class="hero-btns">
-                            <a href="contact.html" class="theme-btn">Məni işə götür <i class="far fa-angle-right"></i></a>
-                            <a href="contact.html" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
+                            <a href="{{ route('front.contact') }}" class="theme-btn">Məni işə götür <i class="far fa-angle-right"></i></a>
+                            <a href="javascript:void(0)" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -68,32 +68,27 @@
                         <div class="about-content-part rel z-2 rmb-55">
                             <div class="section-title mb-35 wow fadeInUp delay-0-2s">
                                 <span class="sub-title mb-15">Haqqımda</span>
-                                <h2>Saytlar Üçün Professional <span>Problem Həlləri</span></h2>
-                                <p>Backend PHP/Laravel Developer kimi e-ticarət, blog, cms və s. Platformaları üçün
-                                    yüksək keyfiyyətli və davamlı proqram təminatının işlənib hazırlanmasında təcrübəm
-                                    var. PHP, Laravel, JavaScript-də texniki biliklərim, problem həll etmə bacarıqlarım
-                                    və komanda ilə əməkdaşlıq bacarıqlarımla birlikdə sistemin səmərəliliyi və
-                                    istifadəçi cəlb edilməsində əhəmiyyətli rolum var.</p>
+                                <h2>{{ substr($about->title, 0, 28)  }} <span>{{ substr($about->title, 28) }}</span></h2>
+                                <p>{{ $about->description }}</p>
                             </div>
                             <ul class="list-style-one two-column wow fadeInUp delay-0-2s">
-                                <li>Brendinq & Dizayn</li>
-                                <li>Rəqəmsal Marketinq</li>
-                                <li>Web Development</li>
-                                <li>Product Design</li>
+                                @foreach($featuredServices as $service)
+                                    <li>{{ $service->name }}</li>
+                                @endforeach
                             </ul>
                             <div class="about-info-box mt-25 wow fadeInUp delay-0-2s">
                                 <div class="info-box-item">
                                     <i class="far fa-envelope"></i>
                                     <div class="content">
                                         <span>Email</span><br>
-                                        <a href="mailto:support@gmail.com">orxanismayilov851@gmail.com</a>
+                                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                     </div>
                                 </div>
                                 <div class="info-box-item">
                                     <i class="far fa-phone"></i>
                                     <div class="content">
                                         <span>Telefon</span><br>
-                                        <a href="callto:+994(55)8783700">+994-(55)-878-37-00</a>
+                                        <a href="callto:{{ $about->phone }}">{{ $about->phone }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,12 +99,12 @@
                             <img src="{{ asset('assets/images/about/about.jpg') }}" alt="About Me">
                             <div class="about-btn btn-one wow fadeInRight delay-0-4s">
                                 <img src="{{ asset('assets/images/about/btn-image1.png') }}" alt="Image">
-                                <h6>Web Developer</h6>
+                                <h6>{{ $about->specialty }}</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="about-btn btn-two wow fadeInRight delay-0-5s">
                                 <img src="{{ asset('assets/images/about/btn-image2.png') }}" alt="Image">
-                                <h6>Orxan İsmayılov</h6>
+                                <h6>{{ $user->name.' '.$user->surname }}</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="dot-shape">
@@ -227,17 +222,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="service-item wow fadeInUp delay-0-2s">
-                        <div class="number">01.</div>
-                        <div class="content">
-                            <h4>Brand Identity Design</h4>
-                            <p>Dignissimos ducimus blanditiis praesen</p>
+                @foreach($services as $index => $service)
+                    <div class="col-lg-6">
+                        <div class="service-item wow fadeInUp delay-0-2s">
+                            <div class="number"> {{ strlen(++$index) < 2 ? 0 : '' }}{{ $index }}.</div>
+                            <div class="content">
+                                <h4>{{ $service->name }}</h4>
+                                <p>{{ $service->description }}</p>
+                            </div>
+{{--                            <a href="service-details.html" class="details-btn"><i class="fas fa-arrow-right"></i></a>--}}
                         </div>
-                        <a href="service-details.html" class="details-btn"><i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
-                <div class="col-lg-6">
+                @endforeach
+                {{--<div class="col-lg-6">
                     <div class="service-item wow fadeInUp delay-0-4s">
                         <div class="number">02.</div>
                         <div class="content">
@@ -286,7 +283,7 @@
                         </div>
                         <a href="service-details.html" class="details-btn"><i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
         <div class="bg-lines">
