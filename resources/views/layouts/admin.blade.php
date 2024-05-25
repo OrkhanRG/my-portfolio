@@ -70,6 +70,12 @@
 <script src="{{ asset('assets/src/plugins/src/mousetrap/mousetrap.min.js') }}"></script>
 <script src="{{ asset('assets/src/plugins/src/waves/waves.min.js') }}"></script>
 <script src="{{ asset('assets/layouts/vertical-light-menu/app.js') }}"></script>
+<script src="{{ asset('assets/js/feature-icon.min.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+    feather.replace();
+</script>
 @stack('js')
 
 </body>

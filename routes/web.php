@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\AuthController;
 //admin
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ServiceController;
 //front
 use App\Http\Controllers\Front\BlogController;
 use App\Http\Controllers\Front\ContactController;
@@ -28,8 +29,13 @@ Route::name('front.')->group(function () {
 });
 
 Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function () {
+    //Dashboard
     Route::get('/', [DashboardController::class, 'dashboard'])->name('index');
+
+    //Services
+    Route::resource('/service', ServiceController::class);
 });
+
 
 //auth
 Route::get('/login', [AuthController::class, 'loginShow'])->name('login')->middleware('guest');
