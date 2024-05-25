@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Empty Page | EQUATION - Multipurpose Bootstrap Dashboard Template </title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/src/assets/img/favicon.ico') }}"/>
     <link href="{{ asset('assets/layouts/vertical-light-menu/css/light/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -17,7 +18,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/assets/css/light/elements/alert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/assets/css/dark/elements/alert.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/dark/sweetalerts2/custom-sweetalert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/light/sweetalerts2/custom-sweetalert.css') }}">
 
     <style>
         body.dark .layout-px-spacing, .layout-px-spacing {
@@ -65,16 +68,38 @@
     </div>
 </div>
 
+<script src="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script src="{{ asset('assets/src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets/src/plugins/src/mousetrap/mousetrap.min.js') }}"></script>
 <script src="{{ asset('assets/src/plugins/src/waves/waves.min.js') }}"></script>
 <script src="{{ asset('assets/layouts/vertical-light-menu/app.js') }}"></script>
 <script src="{{ asset('assets/js/feature-icon.min.js') }}"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 
 <script>
     feather.replace();
+</script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 </script>
 @stack('js')
 

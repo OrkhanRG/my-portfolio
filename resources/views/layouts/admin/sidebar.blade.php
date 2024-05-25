@@ -4,11 +4,11 @@
 
         <div class="navbar-nav theme-brand flex-row  text-center">
             <div class="nav-logo">
-                <div class="nav-item theme-logo">
+                {{--<div class="nav-item theme-logo">
                     <a href="{{ route('admin.index') }}">
                         <img src="{{ asset('assets/src/assets/img/logo.svg') }}" class="navbar-logo" alt="logo">
                     </a>
-                </div>
+                </div>--}}
                 <div class="nav-item theme-text">
                     <a href="{{ route('admin.index') }}" class="nav-link"> PORTFOLİO </a>
                 </div>

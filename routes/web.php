@@ -34,6 +34,8 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
 
     //Services
     Route::resource('/service', ServiceController::class);
+    Route::post('/service/change-status', [ServiceController::class, 'changeStatus'])->name('service.change-status');
+    Route::post('/service/change-is-featured', [ServiceController::class, 'changeIsFeatured'])->name('service.change-is-featured');
 });
 
 

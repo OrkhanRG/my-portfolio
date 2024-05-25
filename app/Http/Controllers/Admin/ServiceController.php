@@ -13,7 +13,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('admin.service.index');
+        $services = Service::query()->orderBy('id', 'desc')->get();
+        return view('admin.service.index', compact('services'));
     }
 
     /**
@@ -72,5 +73,45 @@ class ServiceController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = $request->only('id');
+        $service = Service::query()->where('id', $id)->first();
+
+        if (!$service)
+        {
+            return response()->json([
+                'error' => 'Servis tapılmadı'
+            ], 404);
+        }
+
+        $service->update(['status' => !$service->status]);
+
+        return  response()->json([
+            'success' => 'Status dəyişdirildi!',
+            'data' => $service
+        ], 200);
+    }
+
+    public function changeIsFeatured(Request $request)
+    {
+        $id = $request->only('id');
+        $service = Service::query()->where('id', $id)->first();
+
+        if (!$service)
+        {
+            return response()->json([
+                'error' => 'Servis tapılmadı'
+            ], 404);
+        }
+
+        $service->update(['is_featured' => !$service->is_featured]);
+
+        return  response()->json([
+            'success' => 'Önə çıxarılma statusu dəyişdirildi!',
+            'data' => $service
+        ], 200);
     }
 }
