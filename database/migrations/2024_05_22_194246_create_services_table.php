@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyText('description');
+            $table->tinyText('description')->nullable();
             $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });

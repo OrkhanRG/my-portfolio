@@ -13,7 +13,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::query()->orderBy('id', 'desc')->get();
+        $services = Service::query()->orderBy('id', 'desc')->paginate(10);
         return view('admin.service.index', compact('services'));
     }
 
@@ -56,7 +56,9 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $service = Service::query()->where('id', $id)->firstOrFail();
+
+        return view('admin.service.create_edit', compact('service'));
     }
 
     /**
@@ -64,7 +66,28 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'description' => ['sometimes', 'nullable', 'min:3'],
+        ]);
+        $service = Service::query()->where('id', $id)->first();
+
+        if (!$service)
+        {
+            return redirect()
+                ->back()
+                ->withErrors('Serivs tapılmadı!')
+                ->withInput();
+        }
+
+        $data = $request->only('name', 'description');
+        $data['is_featured'] = $request->has('is_featured');
+
+        $service->update($data);
+
+        return redirect()
+            ->back()
+            ->withSuccess('Servis güncəlləndi!');
     }
 
     /**
@@ -72,7 +95,21 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $service = Service::query()->find($id);
+
+        if (!$service)
+        {
+            return response()->json([
+                'error' => 'Servis silinmədi!'
+            ], 404);
+        }
+
+        $delete = $service->delete();
+
+        return  response()->json([
+            'success' => 'Status dəyişdirildi!',
+            'status' => $delete
+        ], 200);
     }
 
     public function changeStatus(Request $request)
@@ -83,7 +120,7 @@ class ServiceController extends Controller
         if (!$service)
         {
             return response()->json([
-                'error' => 'Servis tapılmadı'
+                'error' => 'Servis tapılmadı!'
             ], 404);
         }
 

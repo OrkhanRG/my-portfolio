@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                     @foreach($services as $service)
-                        <tr>
+                        <tr id="row-{{ $service->id }}">
                             <td>{{ $service->name }}</td>
                             <td>{!! $service->description !!}</td>
                             <td class="text-center">
@@ -43,7 +43,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="javascript:void(0);" class="action-btn btn-edit bs-tooltip me-2"
+                                    <a href="{{ route('admin.service.edit', $service->id) }}" class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" aria-label="Edit"
                                        data-bs-original-title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -52,7 +52,7 @@
                                             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                         </svg>
                                     </a>
-                                    <a href="javascript:void(0);" class="action-btn btn-delete bs-tooltip"
+                                    <a href="javascript:void(0);" data-id="{{ $service->id }}" data-name="{{ $service->name }}" class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" aria-label="Delete"
                                        data-bs-original-title="Delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -71,6 +71,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    {{ $services->links() }}
+                </div>
             </div>
         </div>
     </div>
@@ -141,6 +144,52 @@
                         console.log('Ajax Error!')
                     }
                 });
+            })
+
+            $('.btn-delete').on('click', function () {
+                let self = $(this);
+                let id = self.data('id');
+                let name = self.data('name');
+                let route = "{{ route('admin.service.destroy', 'test') }}"
+                route = route.replace('test', id);
+
+                Swal.fire({
+                    title: name,
+                    text:  "Servisini silmək istədiyinizə əminsiz?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli!',
+                    cancelButtonText: 'Xeyr!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: route,
+                            type: 'POST',
+                            data: {
+                                _method: 'DELETE',
+                            },
+                            success : (data) => {
+                                if(data.status)
+                                {
+                                    $('#row-'+id).remove();
+                                }
+                            },
+                            error: () => {
+                                console.log('Ajax Error!')
+                            }
+                        });
+
+                        Swal.fire(
+                            'Uğurlu!',
+                            `Servis uğurla silindi!`,
+                            'success',
+                        )
+                    }
+                })
+
             })
         })
     </script>

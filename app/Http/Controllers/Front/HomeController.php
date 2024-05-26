@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $user = User::query()->find(1);
         $about = About::query()->find(1);
-        $services = Service::query()->get();
+        $services = Service::query()->where('status', 1)->get();
         $featuredServices = Service::query()->where('is_featured', 1)->get();
 
         return view('front.index', [
