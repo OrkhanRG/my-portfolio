@@ -14,7 +14,7 @@
                     <div class="hero-content rmb-55 wow fadeInUp delay-0-2s">
                         <span class="h2">Salam, mən </span>
                         <h1><b>{{ $user->name.' '.$user->surname }}</b> {{ $about->specialty }}</h1>
-                        <p>{{ $about->short_description }}</p>
+                        <p>{!! $about->short_description !!}</p>
                         <div class="hero-btns">
                             <a href="{{ route('front.contact') }}" class="theme-btn">Məni işə götür <i class="far fa-angle-right"></i></a>
                             <a href="javascript:void(0)" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
@@ -40,7 +40,7 @@
                 <div class="col-lg-5">
                     <div class="author-image-part wow fadeIn delay-0-3s">
                         <div class="bg-circle"></div>
-                        <img src="{{ asset('assets/images/hero/me.png') }}" alt="Author">
+                        <img src="{{ asset($about->img_hero) }}" alt="Author">
                         <div class="progress-shape">
                             <img src="{{ asset('assets/images/hero/progress-shape.png') }}" alt="Progress">
                         </div>
@@ -69,7 +69,7 @@
                             <div class="section-title mb-35 wow fadeInUp delay-0-2s">
                                 <span class="sub-title mb-15">Haqqımda</span>
                                 <h2>{{ substr($about->title, 0, 28)  }} <span>{{ substr($about->title, 28) }}</span></h2>
-                                <p>{{ $about->description }}</p>
+                                <p>{!! $about->description !!}</p>
                             </div>
                             <ul class="list-style-one two-column wow fadeInUp delay-0-2s">
                                 @foreach($featuredServices as $service)
@@ -96,14 +96,14 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="about-image-part wow fadeInUp delay-0-3s">
-                            <img src="{{ asset('assets/images/about/about.jpg') }}" alt="About Me">
+                            <img src="{{ asset($about->img_about) }}" alt="About Me">
                             <div class="about-btn btn-one wow fadeInRight delay-0-4s">
                                 <img src="{{ asset('assets/images/about/btn-image1.png') }}" alt="Image">
                                 <h6>{{ $about->specialty }}</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="about-btn btn-two wow fadeInRight delay-0-5s">
-                                <img src="{{ asset('assets/images/about/btn-image2.png') }}" alt="Image">
+                                <img src="{{ asset('assets/images/about/btn-image3.png') }}" alt="Image">
                                 <h6>{{ $user->name.' '.$user->surname }}</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
@@ -228,7 +228,7 @@
                             <div class="number"> {{ strlen(++$index) < 2 ? 0 : '' }}{{ $index }}.</div>
                             <div class="content">
                                 <h4>{{ $service->name }}</h4>
-                                <p>{{ $service->description }}</p>
+                                <p>{!! $service->description !!}</p>
                             </div>
 {{--                            <a href="service-details.html" class="details-btn"><i class="fas fa-arrow-right"></i></a>--}}
                         </div>

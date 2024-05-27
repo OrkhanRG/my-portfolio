@@ -42,12 +42,25 @@
 
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name='is_featured' id="is_featured"
-                                    {{ isset($service) ? ($service->is_featured ? 'checked' : '') : (old('checkbox') ? 'checked' : '') }}>
-                                <label class="form-check-label" for="is_featured">
-                                    Önə çıxarılsın?
-                                </label>
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name='status' id="status"
+                                            {{ isset($service) ? ($service->status ? 'checked' : '') : (old('status') ? 'checked' : '') }}>
+                                        <label class="form-check-label" for="status">
+                                            Aktiv olsun?
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name='is_featured' id="is_featured"
+                                            {{ isset($service) ? ($service->is_featured ? 'checked' : '') : (old('checkbox') ? 'checked' : '') }}>
+                                        <label class="form-check-label" for="is_featured">
+                                            Önə çıxarılsın?
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -100,7 +100,7 @@
                                         <div class="form-check form-check-primary form-check-inline">
                                             <input class="form-check-input me-3" type="checkbox"
                                                    id="remember" name="remember">
-                                            <label class="form-check-label" for="form-check-default">
+                                            <label class="form-check-label" for="remember">
                                                 Məni xatırla
                                             </label>
                                         </div>

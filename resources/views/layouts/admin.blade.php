@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/dark/sweetalerts2/custom-sweetalert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/light/sweetalerts2/custom-sweetalert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/custom/custom.css') }}">
 
     <style>
         body.dark .layout-px-spacing, .layout-px-spacing {
@@ -77,6 +78,7 @@
 <script src="{{ asset('assets/layouts/vertical-light-menu/app.js') }}"></script>
 <script src="{{ asset('assets/js/feature-icon.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom/custom.js') }}"></script>
 
 <script>
     feather.replace();

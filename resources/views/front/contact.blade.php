@@ -51,10 +51,10 @@
                         </div>
                         <h5>Follow Me</h5>
                         <div class="social-style-one mt-10">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="{{ $about->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{ $about->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ $about->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="{{ $about->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

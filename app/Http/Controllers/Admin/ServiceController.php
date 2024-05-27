@@ -36,6 +36,7 @@ class ServiceController extends Controller
         ]);
 
         $data = $request->only('name', 'description');
+        $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
 
         Service::query()->create($data);
@@ -81,6 +82,7 @@ class ServiceController extends Controller
         }
 
         $data = $request->only('name', 'description');
+        $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
 
         $service->update($data);

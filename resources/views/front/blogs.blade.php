@@ -5,8 +5,6 @@
 @endpush
 
 @section('content')
-    <div class="form-back-drop"></div>
-
     <!-- Page Banner Start -->
     <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
         <div class="container">

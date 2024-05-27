@@ -71,10 +71,10 @@
 
             <!--Social Icons-->
             <div class="social-style-one">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="{{ $about->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="{{ $about->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ $about->linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="{{ $about->github }}" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </section>

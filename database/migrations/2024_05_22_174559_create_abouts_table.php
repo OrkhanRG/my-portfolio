@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('x')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
             $table->tinyText('short_description');
             $table->text('description');
             $table->timestamps();

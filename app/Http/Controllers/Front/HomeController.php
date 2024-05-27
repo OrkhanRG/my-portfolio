@@ -13,13 +13,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::query()->find(1);
-        $about = About::query()->find(1);
         $services = Service::query()->where('status', 1)->get();
         $featuredServices = Service::query()->where('is_featured', 1)->get();
 
         return view('front.index', [
             'user' => $user,
-            'about' => $about,
             'services' => $services,
             'featuredServices' => $featuredServices,
         ]);

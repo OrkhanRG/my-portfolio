@@ -27,7 +27,8 @@ class AboutSeeder extends Seeder
             'address' => 'Azerbaijan, Baku Nəsimi rayon Mustafa Topçubaşov 21A',
             'instagram' => 'https://www.instagram.com/_orkhan_rg_/',
             'facebook' => 'https://www.facebook.com/profile.php?id=100010973659122',
-            'x' => 'https://x.com/',
+            'linkedin' => 'https://linkedin.com/',
+            'github' => 'https://github.com/',
         ]);
     }
 }

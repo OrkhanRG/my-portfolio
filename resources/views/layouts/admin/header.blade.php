@@ -37,24 +37,19 @@
             <li class="nav-item dropdown language-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown"
                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ asset('/assets/src/assets/img/1x1/us.svg') }}" class="flag-width" alt="flag">
+                    <img src="{{ asset('/assets/src/assets/img/1x1/az.svg') }}" class="flag-width" alt="flag">
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
                     <a class="dropdown-item d-flex" href="javascript:void(0);"><img
-                            src="{{ asset('assets/src/assets/img/1x1/us.svg') }}" class="flag-width" alt="flag"> <span
-                            class="align-self-center">&nbsp;English</span></a>
+                            src="{{ asset('assets/src/assets/img/1x1/az.svg') }}" class="flag-width" alt="flag"> <span
+                            class="align-self-center">&nbsp;Azerbaijan</span></a>
                     <a class="dropdown-item d-flex" href="javascript:void(0);"><img
                             src="{{ asset('assets/src/assets/img/1x1/tr.svg') }}" class="flag-width" alt="flag"> <span
                             class="align-self-center">&nbsp;Turkish</span></a>
                     <a class="dropdown-item d-flex" href="javascript:void(0);"><img
-                            src="{{ asset('assets/src/assets/img/1x1/br.svg') }}" class="flag-width" alt="flag"> <span
-                            class="align-self-center">&nbsp;Portuguese</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img
-                            src="{{ asset('assets/src/assets/img/1x1/in.svg') }}" class="flag-width" alt="flag"> <span
-                            class="align-self-center">&nbsp;Hindi</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img
-                            src="{{ asset('assets/src/assets/img/1x1/de.svg') }}" class="flag-width" alt="flag"> <span
-                            class="align-self-center">&nbsp;German</span></a>
+                            src="{{ asset('assets/src/assets/img/1x1/us.svg') }}" class="flag-width" alt="flag"> <span
+                            class="align-self-center">&nbsp;English</span></a>
+
                 </div>
             </li>
 
@@ -283,7 +278,7 @@
                         </div>
                     </div>
                     <div class="dropdown-item">
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('admin.about.index') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-user">
