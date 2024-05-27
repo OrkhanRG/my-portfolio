@@ -184,7 +184,7 @@
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         @if($about->img_hero)
-                                                                            <img width="80" src="{{ asset($about->img_hero) }}" alt="">
+                                                                            <img width="80" id="imgHeroPreview" src="{{ asset($about->img_hero) }}" alt="">
                                                                         @else
                                                                             <img width="100" src="{{ asset('/assets/img/default/img/hero.png') }}" alt="">
                                                                         @endif
@@ -208,7 +208,7 @@
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         @if($about->img_about)
-                                                                            <img width="80" src="{{ asset($about->img_about) }}" alt="">
+                                                                            <img width="80" id="imgAboutPreview" src="{{ asset($about->img_about) }}" alt="">
                                                                         @else
                                                                             <img width="100" src="{{ asset('/assets/img/default/img/hero.png') }}" alt="">
                                                                         @endif
@@ -336,6 +336,30 @@
 @endsection
 
 @push('js')
+    <script>
+        let img_about = document.querySelector('#img_about');
+        let img_hero = document.querySelector('#img_hero');
+
+        img_hero.addEventListener('change', function (event) {
+            let element = event.target;
+            previewImage(element, 'imgHeroPreview')
+        });
+
+        img_about.addEventListener('change', function (event) {
+            let element = event.target;
+            previewImage(element, 'imgAboutPreview')
+        });
+
+        function previewImage(element, imgSrc) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var img = document.getElementById(imgSrc);
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            reader.readAsDataURL(element.files[0]);
+        }
+    </script>
     <script>
         ClassicEditor
             .create(document.querySelector('#description'))
