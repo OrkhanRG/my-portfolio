@@ -70,6 +70,7 @@
 </div>
 
 <script src="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+@include('sweetalert::alert')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script src="{{ asset('assets/src/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>

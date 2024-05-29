@@ -33,6 +33,10 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     //Dashboard
     Route::get('/', [DashboardController::class, 'dashboard'])->name('index');
 
+    //cv-upload-download
+    Route::get('/cv-download', [DashboardController::class, 'cvDownload'])->name('cv-download');
+    Route::post('/cv-upload', [DashboardController::class, 'cvUpload'])->name('cv-upload');
+
     //Services
     Route::prefix('service')->name('service.')->group(function (){
         Route::resource('/', ServiceController::class);

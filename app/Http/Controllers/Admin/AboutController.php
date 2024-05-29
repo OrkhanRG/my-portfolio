@@ -31,7 +31,8 @@ class AboutController extends Controller
             {
                 unlink($about->img_hero);
             }
-            $dataAbout['img_hero'] = imgUpload($request->file('img_hero'));
+            $filePath = 'assets/img/';
+            $dataAbout['img_hero'] = fileUpload($request->file('img_hero'), $filePath);
         }
 
         if ($request->hasFile('img_about'))
@@ -40,7 +41,8 @@ class AboutController extends Controller
             {
                 unlink($about->img_about);
             }
-            $dataAbout['img_about'] = imgUpload($request->file('img_about'));
+            $filePath = 'assets/img/';
+            $dataAbout['img_about'] = fileUpload($request->file('img_about'), $filePath);
         }
 
         $user->update($dataUser);
