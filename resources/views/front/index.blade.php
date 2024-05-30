@@ -24,7 +24,7 @@
                 <div class="col-lg-3 col-sm-5 order-lg-3">
                     <div class="hero-counter-wrap ms-lg-auto rmb-55 wow fadeInUp delay-0-4s">
                         <div class="counter-item counter-text-wrap">
-                            <span class="count-text plus" data-speed="3000" data-stop="13">0</span>
+                            <span class="count-text plus" data-speed="3000" data-stop="{{ $totalExperience['year'] == 0 ? 1 : $totalExperience['year'] }}">0</span>
                             <span class="counter-title">İllik Təcrübə</span>
                         </div>
                         <div class="counter-item counter-text-wrap">
@@ -146,54 +146,20 @@
                     </div>
                     <div class="resume-items-wrap">
                         <div class="row justify-content-between">
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-3s">
-                                    <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
-                                    </div>
-                                    <div class="content">
-                                        <span class="years">2021 - Davam Edir</span>
-                                        <h4>Lead Product Designer</h4>
-                                        <span class="company">Google</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-4s">
-                                    <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
-                                    </div>
-                                    <div class="content">
-                                        <span class="years">2016 - 2018</span>
-                                        <h4>Junior UX/UI Designer</h4>
-                                        <span class="company">LinkedIn</span>
+                            @foreach($experiences as $experience)
+                                <div class="col-xl-5 col-md-6">
+                                    <div class="resume-item wow fadeInUp delay-0-3s">
+                                        <div class="icon">
+                                            <i class="far fa-arrow-right"></i>
+                                        </div>
+                                        <div class="content">
+                                            <span class="years">{{ \Carbon\Carbon::make($experience->start_date)->format('m.Y') }} - {{ $experience->end_date ? \Carbon\Carbon::make($experience->end_date)->format('m.Y') :  'Davam Edir'}}</span>
+                                            <h4>{{ $experience->position }}</h4>
+                                            <span class="company">{{ $experience->company }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-2s">
-                                    <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
-                                    </div>
-                                    <div class="content">
-                                        <span class="years">2018 - 2021</span>
-                                        <h4>Senior Product Designer</h4>
-                                        <span class="company">Webflow</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-4s">
-                                    <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
-                                    </div>
-                                    <div class="content">
-                                        <span class="years">2014 - 2016</span>
-                                        <h4>Graphics Designer</h4>
-                                        <span class="company">Apple</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

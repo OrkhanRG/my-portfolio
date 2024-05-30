@@ -39,6 +39,10 @@ class DashboardController extends Controller
     {
         $about = About::query()->first();
         $filePath = $about->cv;
+        if ($filePath == '')
+        {
+            return back();
+        }
 
         return response()->download($filePath);
     }

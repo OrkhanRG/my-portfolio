@@ -35,7 +35,7 @@
                             <td>{{ $experience->position }}</td>
                             <td>{!! substr($experience->description, 0, 50) !!}...</td>
                             <td>{{ $experience->start_date }}</td>
-                            <td>{{ $experience->end_date }}</td>
+                            <td>{{ $experience->end_date ?? 'Davam Edir' }}</td>
                             <td class="text-center">
                                 <span class="badge badge-light-{{ $experience->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $experience->id }}">
                                    {{ $experience->status ? 'Aktiv' : 'Passiv' }}
