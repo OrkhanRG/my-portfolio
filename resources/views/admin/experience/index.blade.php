@@ -123,7 +123,7 @@
 
                 Swal.fire({
                     title: name,
-                    text:  "Servisini silmək istədiyinizə əminsiz?",
+                    text:  "Iş təcrübəsini silmək istədiyinizə əminsiz?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

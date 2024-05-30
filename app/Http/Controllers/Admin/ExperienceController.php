@@ -86,6 +86,40 @@ class ExperienceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $experience = Experience::query()->find($id);
+
+        if (!$experience)
+        {
+            return response()->json([
+                'error' => 'İş təcrübəsi silinmədi!'
+            ], 404);
+        }
+
+        $delete = $experience->delete();
+
+        return  response()->json([
+            'success' => 'İş təcrübəsi silindi!',
+            'status' => $delete
+        ], 200);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = $request->only('id');
+        $experience = Experience::query()->where('id', $id)->first();
+
+        if (!$experience)
+        {
+            return response()->json([
+                'error' => 'İş təcrübəsi tapılmadı!'
+            ], 404);
+        }
+
+        $experience->update(['status' => !$experience->status]);
+
+        return  response()->json([
+            'success' => 'Status dəyişdirildi!',
+            'data' => $experience
+        ], 200);
     }
 }
