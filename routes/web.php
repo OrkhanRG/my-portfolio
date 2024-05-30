@@ -6,13 +6,13 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\ExperienceController;
 //front
 use App\Http\Controllers\Front\BlogController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProjectController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::name('front.')->middleware('about')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -38,17 +38,21 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     Route::post('/cv-upload', [DashboardController::class, 'cvUpload'])->name('cv-upload');
 
     //Services
-    Route::prefix('service')->name('service.')->group(function (){
-        Route::resource('/', ServiceController::class);
-        Route::post('/change-status', [ServiceController::class, 'changeStatus'])->name('change-status');
-        Route::post('/change-is-featured', [ServiceController::class, 'changeIsFeatured'])->name('change-is-featured');
-    });
+    Route::resource('/service', ServiceController::class);
+    Route::post('/service/change-status', [ServiceController::class, 'changeStatus'])->name('service.change-status');
+    Route::post('/service/change-is-featured', [ServiceController::class, 'changeIsFeatured'])->name('service.change-is-featured');
 
     //about
     Route::prefix('about')->name('about.')->group(function (){
         Route::get('/', [AboutController::class, 'index'])->name('index');
         Route::post('/', [AboutController::class, 'generalInfo']);
     });
+
+    //experience
+    Route::resource('/experience', ExperienceController::class);
+    Route::post('/experience/change-status', [ExperienceController::class, 'changeStatus'])->name('experience.change-status');
+
+
 });
 
 
