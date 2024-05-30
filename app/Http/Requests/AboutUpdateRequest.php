@@ -27,7 +27,7 @@ class AboutUpdateRequest extends FormRequest
             "specialty" => ['required', 'string', 'min:3'],
 //            "email" => ['required', 'email', 'unique:users,email,'.auth()->user()->id],
             "short_description" => ['required', 'min:3', 'max:255'],
-            "description" => ['required', 'min:3', 'max:500'],
+            "description" => ['required', 'min:3', 'max:1000'],
             "img_hero" => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,gif,bmp,webp', 'max:2048'],
             "img_about" => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,gif,bmp,webp', 'max:2048'],
         ];

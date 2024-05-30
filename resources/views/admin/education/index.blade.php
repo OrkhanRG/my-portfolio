@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Təcrübə')
+@section('title', 'Servislər')
 
 @push('css')
 @endpush
@@ -9,7 +9,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>Təcrübə</h4>
+                    <h4>Servislər</h4>
                 </div>
             </div>
         </div>
@@ -19,9 +19,10 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col"><b>Şirkət</b></th>
-                        <th scope="col"><b>İşlədiyi Sahə</b></th>
-                        <th scope="col"><b>Haqqında</b></th>
+                        <th scope="col"><b>Təhsil Müəssisəsi</b></th>
+                        <th scope="col"><b>Təhsil Sahəsi</b></th>
+                        <th scope="col"><b>Dərəcə</b></th>
+                        <th scope="col"><b>Description</b></th>
                         <th scope="col"><b>Başlama Vaxtı</b></th>
                         <th scope="col"><b>Bitmə Vaxtı</b></th>
                         <th class="text-center" scope="col"><b>Status</b></th>
@@ -29,21 +30,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($experiences as $experience)
-                        <tr id="row-{{ $experience->id }}">
-                            <td>{{ $experience->company }}</td>
-                            <td>{{ $experience->position }}</td>
-                            <td>{!! substr($experience->description, 0, 50) !!}...</td>
-                            <td>{{ $experience->start_date }}</td>
-                            <td>{{ $experience->end_date ?? 'Davam Edir' }}</td>
+                    @foreach($educations as $education)
+                        <tr id="row-{{ $education->id }}">
+                            <td>{{ $education->institution }}</td>
+                            <td>{{ $education->field_of_study }}</td>
+                            <td>{{ $education->degree }}</td>
+                            <td>{!! substr($education->description, 0, 50) !!}...</td>
+                            <td>{{ $education->start_date }}</td>
+                            <td>{{ $education->end_date ?? 'Davam Edir' }}</td>
                             <td class="text-center">
-                                <span class="badge badge-light-{{ $experience->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $experience->id }}">
-                                   {{ $experience->status ? 'Aktiv' : 'Passiv' }}
+                                <span class="badge badge-light-{{ $education->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $education->id }}">
+                                   {{ $education->status ? 'Aktiv' : 'Passiv' }}
                                 </span>
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="{{ route('admin.experience.edit', $experience->id) }}" class="action-btn btn-edit bs-tooltip me-2"
+                                    <a href="{{ route('admin.education.edit', $education->id) }}" class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" aria-label="Edit"
                                        data-bs-original-title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -52,7 +54,7 @@
                                             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                         </svg>
                                     </a>
-                                    <a href="javascript:void(0);" data-id="{{ $experience->id }}" data-name="{{ $experience->company }}" class="action-btn btn-delete bs-tooltip"
+                                    <a href="javascript:void(0);" data-id="{{ $education->id }}" data-name="{{ $education->company }}" class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" aria-label="Delete"
                                        data-bs-original-title="Delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -72,7 +74,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $experiences->links() }}
+                    {{ $educations->links() }}
                 </div>
             </div>
         </div>
@@ -87,7 +89,7 @@
                 let id = self.data('id');
 
                 $.ajax({
-                    url: "{{ route('admin.experience.change-status') }}",
+                    url: "{{ route('admin.education.change-status') }}",
                     type: 'POST',
                     data: {
                         id: id
@@ -118,12 +120,12 @@
                 let self = $(this);
                 let id = self.data('id');
                 let name = self.data('name');
-                let route = "{{ route('admin.experience.destroy', 'test') }}"
+                let route = "{{ route('admin.education.destroy', 'test') }}"
                 route = route.replace('test', id);
 
                 Swal.fire({
                     title: name,
-                    text:  "Iş təcrübəsini silmək istədiyinizə əminsiz?",
+                    text:  "Təhsilini silmək istədiyinizə əminsiz?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -152,7 +154,7 @@
 
                         Swal.fire(
                             'Uğurlu!',
-                            `Servis uğurla silindi!`,
+                            `Təhsil uğurla silindi!`,
                             'success',
                         )
                     }

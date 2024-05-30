@@ -81,7 +81,7 @@
             <li class="menu">
                 <a href="#experience" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.experience.index', 'admin.experience.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
                     <div class="">
-                        <i data-feather="award"></i>
+                        <i data-feather="briefcase"></i>
                         <span>İş - Təcrübə</span>
                     </div>
                     <div>
@@ -98,7 +98,25 @@
                 </ul>
             </li>
 
-
+            <li class="menu">
+                <a href="#education" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.education.index', 'admin.education.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
+                    <div class="">
+                        <i data-feather="award"></i>
+                        <span>Təhsil</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled {{ Route::is('admin.education.index', 'admin.education.create') ? 'show' : '' }}" id="education" data-bs-parent="#accordionExample">
+                    <li class="{{ Route::is('admin.education.index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.education.index') }}"> Təhsil</a>
+                    </li>
+                    <li class="{{ Route::is('admin.education.create') ? 'active' : '' }}">
+                        <a href="{{ route('admin.education.create') }}">Yeni Təhsil Yarat</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </nav>

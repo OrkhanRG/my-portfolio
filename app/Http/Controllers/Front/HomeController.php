@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Service;
 use App\Models\User;
@@ -18,6 +19,7 @@ class HomeController extends Controller
         $services = Service::query()->where('status', 1)->get();
         $featuredServices = Service::query()->where('status', 1)->where('is_featured', 1)->get();
         $experiences = Experience::query()->where('status', 1)->get();
+        $educations = Education::query()->where('status', 1)->get();
 
         $totalMonth = 0;
         foreach ($experiences as $experience)
@@ -39,6 +41,7 @@ class HomeController extends Controller
             'featuredServices' => $featuredServices,
             'experiences' => $experiences,
             'totalExperience' => $totalExperience,
+            'educations' => $educations,
         ]);
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', (isset($experience) ? '' : 'Yeni').' Təcrübə '.(isset($experience) ? 'Güncəllə' : 'Əlavə ET'))
+@section('title', ' Təhsil '.(isset($education) ? 'Güncəllə' : 'Əlavə ET'))
 
 @push('css')
     <style>
@@ -38,14 +38,14 @@
                 <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
                      aria-labelledby="animated-underline-home-tab">
                     <div class="row">
-                        <form action="{{ isset($experience) ? route('admin.experience.update', $experience->id) : route('admin.experience.store') }}" method="POST">
+                        <form action="{{ isset($education) ? route('admin.education.update', $education->id) : route('admin.education.store') }}" method="POST">
                             @csrf
-                            @isset($experience)
+                            @isset($education)
                                 @method('PUT')
                             @endisset
                             <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing section general-info">
                                 <div class="info">
-                                    <h6 class="">{{ isset($experience) ? '' : 'Yeni' }} Iş - Təcrübə {{ isset($experience) ? 'Güncəllə' : 'Əlavə ET' }}</h6>
+                                    <h6 class="">Təhsil {{ isset($education) ? 'Güncəllə' : 'Əlavə ET' }}</h6>
                                     <div class="row">
                                         <div class="col-lg-11 mx-auto">
                                             <div class="row">
@@ -55,36 +55,52 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="company">Şirkət</label>
+                                                                    <label for="institution">Təhsil Müəssisə Adı</label>
                                                                     <input type="text"
-                                                                           class="form-control mb-2 @error('position') is-invalid @enderror"
-                                                                           name='company' id="company" placeholder="Şirkət"
-                                                                           value="{{ $experience->company ?? old('company') }}">
+                                                                           class="form-control mb-2 @error('institution') is-invalid @enderror"
+                                                                           name='institution' id="institution" placeholder="Təhsil Müəssisə Adı"
+                                                                           value="{{ $education->institution ?? old('institution') }}">
                                                                 </div>
-                                                                @error('position')
+                                                                @error('institution')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="position">Sahə</label>
-                                                                    <input type="text"
-                                                                           class="form-control mb-2 @error('position') is-invalid @enderror"
-                                                                           name='position' id="position" placeholder="Sahə"
-                                                                           value="{{ $experience->position ?? old('position') }}">
+                                                                    <label for="field_of_study">Təhsil Sahəsi</label>
+                                                                    <input type="text" class="form-control mb-2"
+                                                                           name='field_of_study' id="field_of_study" placeholder="Təhsil Sahəsi"
+                                                                           value="{{ $education->field_of_study ?? old('field_of_study') }}">
                                                                 </div>
-                                                                @error('position')
+                                                                @error('field_of_study')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="degree">Dərəcə</label>
+                                                                    <select class="form-select" name="degree" id="degree" aria-label="Default select example">
+                                                                        <option value="{{ null }}" selected>Elmi dərəcə</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Ali' ? 'selected' : '') : '' }} value="Ali">Ali</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Natamam Ali' ? 'selected' : '') : '' }} value="Natamam Ali">Natamam Ali</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Orta Texniki' ? 'selected' : '') : '' }} value="Orta Texniki">Orta Texniki</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Orta Xüsusi' ? 'selected' : '') : '' }} value="Orta Xüsusi">Orta Xüsusi</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Orta' ? 'selected' : '') : '' }} value="Orta">Orta</option>
+                                                                    </select>
+                                                                </div>
+                                                                @error('degree')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label for="start_date">Başlama Vaxtı</label>
+                                                                    <label for="end_date">Başlama Vaxtı</label>
                                                                     <input type="text" class="form-control mb-2"
                                                                            name='start_date' id="start_date" placeholder="Başlama Vaxtı"
-                                                                           value="{{ $experience->start_date ?? old('start_date') }}">
+                                                                           value="{{ $education->start_date ?? old('start_date') }}">
                                                                 </div>
                                                                 @error('start_date')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -96,7 +112,7 @@
                                                                     <label for="end_date">Bitmə Vaxtı</label>
                                                                     <input type="text" class="form-control mb-2"
                                                                            name='end_date' id="end_date" placeholder="Bitmə Vaxtı"
-                                                                           value="{{ $experience->end_date ?? old('end_date') }}">
+                                                                           value="{{ $education->end_date ?? old('end_date') }}">
                                                                 </div>
                                                                 @error('end_date')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -109,7 +125,7 @@
                                                                     <textarea
                                                                         class="form-control ck-editor__editable ck-editor__editable_inline"
                                                                         name="description" id="description"
-                                                                        placeholder="Açığlama">{{ $experience->description ?? old('description') }}</textarea>
+                                                                        placeholder="Açığlama">{{ $education->description ?? old('description') }}</textarea>
                                                                 </div>
                                                                 @error('description')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -119,7 +135,7 @@
                                                             <div class="col-md-6 mt-3">
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="checkbox" name='status' id="status"
-                                                                        {{ isset($experience) ? ($experience->status ? 'checked' : '') : (old('status') ? 'checked' : '') }}>
+                                                                        {{ isset($education) ? ($education->status ? 'checked' : '') : (old('status') ? 'checked' : '') }}>
                                                                     <label class="form-check-label" for="status">
                                                                         Aktiv olsun?
                                                                     </label>
