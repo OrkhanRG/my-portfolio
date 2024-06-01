@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Service;
+use App\Models\Skill;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class HomeController extends Controller
         $featuredServices = Service::query()->where('status', 1)->where('is_featured', 1)->get();
         $experiences = Experience::query()->where('status', 1)->get();
         $educations = Education::query()->where('status', 1)->get();
+        $skills = Skill::query()->where('status', 1)->get();
 
         $totalMonth = 0;
         foreach ($experiences as $experience)
@@ -42,6 +44,7 @@ class HomeController extends Controller
             'experiences' => $experiences,
             'totalExperience' => $totalExperience,
             'educations' => $educations,
+            'skills' => $skills,
         ]);
     }
 }

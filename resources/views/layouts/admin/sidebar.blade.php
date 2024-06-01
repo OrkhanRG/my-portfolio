@@ -117,6 +117,26 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="menu">
+                <a href="#skill" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.skill.index', 'admin.skill.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
+                    <div class="">
+                        <i data-feather="code"></i>
+                        <span>Bacarıqlar</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled {{ Route::is('admin.skill.index', 'admin.skill.create') ? 'show' : '' }}" id="skill" data-bs-parent="#accordionExample">
+                    <li class="{{ Route::is('admin.skill.index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.skill.index') }}"> Bacarıqlar</a>
+                    </li>
+                    <li class="{{ Route::is('admin.skill.create') ? 'active' : '' }}">
+                        <a href="{{ route('admin.skill.create') }}">Yeni Bacarıq Yarat</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </nav>

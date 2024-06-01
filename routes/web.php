@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\SkillController;
 
 //front
 use App\Http\Controllers\Front\BlogController;
@@ -58,6 +59,10 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     //experience
     Route::resource('/education', EducationController::class);
     Route::post('/education/change-status', [EducationController::class, 'changeStatus'])->name('education.change-status');
+
+    //skill
+    Route::resource('/skill', SkillController::class);
+    Route::post('/skill/change-status', [SkillController::class, 'changeStatus'])->name('skill.change-status');
 });
 
 

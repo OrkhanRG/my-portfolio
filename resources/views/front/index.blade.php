@@ -221,7 +221,7 @@
     <!-- Resume Area end -->
 
 
-    <!-- University Area start -->
+    <!-- Services Area start -->
     <section class="services-area pt-130 rpt-100 pb-100 rpb-70 rel z-1">
         <div class="container">
             <div class="row justify-content-center">
@@ -317,71 +317,26 @@
                         <div class="skill-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
                             <div class="section-title mb-40">
                                 <span class="sub-title mb-15">Bacarıqlar</span>
-                                <h2>Populyar <span>Bacarıqlar və Təcrübələrim</span></h2>
-                                <p>Bu bölmədə istifadə etdiyim populyar bacarıqlarımı görə bilər və haqqımda daha çox məlumat üçün aşağıdakı <b>Daha Ətraflı</b> düyməsinə sıxa bilərsiz </p>
+                                <h2>Populyar <span>Bacarıqlarım</span></h2>
+                                <p>Bu bölmədə ən çox istifadə etdiyim proqramlaşdırma bacarıqlarımı görə bilərsiniz.
+                                    Frontend və backend inkişaf sahələrində geniş təcrübəm var, xüsusilə PHP və Laravel frameworku üzrə ixtisaslaşmışam.
+                                    Bu bacarıqlarım, layihələrimi daha səmərəli və effektiv şəkildə tamamlamama kömək edir.
+                                </p>
                             </div>
-                            <a href="about.html" class="theme-btn">Daha Ətraflı <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="skill-items-wrap">
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-2s">
-                                        <img src="{{ asset('assets/images/skills/skill1.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">95%</span>
+                                @foreach($skills as $skill)
+                                    <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
+                                        <div class="skill-item wow fadeInUp delay-0-2s">
+                                            <img style="width: 60px;  height: 60px" src="{{ asset($skill->image) }}" alt="Skill">
+                                            <h5>{{ $skill->name }}</h5>
+                                            <span class="percent">{{ $skill->proficiency }}%</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-3s">
-                                        <img src="{{ asset('assets/images/skills/skill2.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">83</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-4s">
-                                        <img src="{{ asset('assets/images/skills/skill3.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">93%</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-5s">
-                                        <img src="{{ asset('assets/images/skills/skill4.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">84%</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-2s">
-                                        <img src="{{ asset('assets/images/skills/skill5.png') }}" alt="Skill">
-                                        <h5>Angular</h5>
-                                        <span class="percent">65%</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-3s">
-                                        <img src="{{ asset('assets/images/skills/skill6.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">86%</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-4s">
-                                        <img src="{{ asset('assets/images/skills/skill7.png') }}" alt="Skill">
-                                        <h5>Python</h5>
-                                        <span class="percent">62%</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                    <div class="skill-item wow fadeInUp delay-0-5s">
-                                        <img src="{{ asset('assets/images/skills/skill8.png') }}" alt="Skill">
-                                        <h5>Figma</h5>
-                                        <span class="percent">94%</span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
