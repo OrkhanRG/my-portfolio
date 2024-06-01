@@ -7,11 +7,11 @@
         if (event.isDefaultPrevented()) {
             // handle the invalid form...
             formError();
-            submitMSG(false, "Did you fill in the form properly?");
+            submitMSG(false, "Zəhmət olmasa tələb olunan xanaları doldurun!");
         } else {
             // everything looks good!
-            event.preventDefault();
-            submitForm();
+            // event.preventDefault();
+            // submitForm();
         }
     });
 

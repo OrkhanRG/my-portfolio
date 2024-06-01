@@ -29,6 +29,8 @@
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.css') }}">
+
     @stack('css')
 
 </head>
@@ -53,15 +55,16 @@
 
             <!--Appointment Form-->
             <div class="appointment-form">
-                <form method="post" action="{{ route('front.contact') }}">
+                <form method="post" action="{{ route('admin.contact.store') }}">
+                    @csrf
                     <div class="form-group">
-                        <input type="text" name="text" value="" placeholder="Ad Soyad" required>
+                        <input type="text" name="name" value="" placeholder="Ad Soyad" required>
                     </div>
                     <div class="form-group">
                         <input type="email" name="email" value="" placeholder="Email ünvan" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Mesajınız" rows="5"></textarea>
+                        <textarea placeholder="Mesajınız" name="message" rows="5"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="theme-btn">Göndər</button>
@@ -87,7 +90,8 @@
 </div>
 <!--End pagewrapper-->
 
-
+<script src="{{ asset('assets/src/plugins/src/sweetalerts2/sweetalerts2.min.js') }}"></script>
+@include('sweetalert::alert')
 <!-- Jquery -->
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <!-- Bootstrap -->

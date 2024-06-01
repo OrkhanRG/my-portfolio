@@ -452,21 +452,22 @@
                             <p>Sağ tərəfdə olan formu dolduraraq mənimlə əlaqə saxlaya bilərsiz.</p>
                         </div>
                         <ul class="list-style-two">
-                            <li>5+ İllik Təcrübə</li>
-                            <li>Professional Web Designer</li>
-                            <li>Mobile Apps Design</li>
-                            <li>Xüsusi Dizayn Dəstəyi</li>
+                            <li>{{ $totalExperience['year'] == 0 ? 1 : $totalExperience['year'] }}+ İllik Təcrübə</li>
+                            @foreach($featuredServices as $service)
+                                <li>{{ $service->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="contact-form contact-form-wrap form-style-one wow fadeInUp delay-0-4s">
-                        <form id="contactForm" class="contactForm" name="contactForm" action="{{ asset('assets/php/form-process.php') }}" method="post">
+                        <form id="contactForm" class="contactForm" name="contactForm" action="{{ route('admin.contact.store') }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Ad Soyad</label>
-                                        <input type="text" id="name" name="name" class="form-control" value="" placeholder="Ad Soyad" required data-error="Please enter your Name">
+                                        <input type="text" id="name" name="name" class="form-control" value="" placeholder="Ad Soyad" required data-error="Zəhmət olmasa adınız daxil edin!">
                                         <label for="name" class="for-icon"><i class="far fa-user"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
@@ -474,31 +475,31 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">E-mail </label>
-                                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="E-mail ünvanınız" required data-error="Please enter your Email">
+                                        <input type="email" id="email" name="email" class="form-control" value="" placeholder="E-mail ünvanınız" required data-error="Zəhmət olmasa email ünvanınızı daxil edin!">
                                         <label for="email" class="for-icon"><i class="far fa-envelope"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="phone_number">Telefon </label>
-                                        <input type="text" id="phone_number" name="phone_number" class="form-control" value="" placeholder="Telefon Nömrəniz" required data-error="Please enter your Phone Number">
+                                        <label for="phone">Telefon </label>
+                                        <input type="text" id="phone" name="phone" class="form-control" value="" placeholder="Telefon Nömrəniz">
                                         <label for="phone_number" class="for-icon"><i class="far fa-phone"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="subject">Başlıq</label>
-                                        <input type="text" id="subject" name="subject" class="form-control" value="" placeholder="Başlıq" required data-error="Please enter your Subject">
-                                        <label for="subject" class="for-icon"><i class="far fa-text"></i></label>
+                                        <label for="title">Başlıq</label>
+                                        <input type="text" id="title" name="title" class="form-control" value="" placeholder="Başlıq">
+                                        <label for="title" class="for-icon"><i class="far fa-text"></i></label>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="message">Mesajınız</label>
-                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="Mesaj Yazın" required data-error="Please enter your Message"></textarea>
+                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="Mesaj Yazın"></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>

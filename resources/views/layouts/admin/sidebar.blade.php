@@ -137,6 +137,15 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="menu">
+                <a href="{{ route('admin.contact.index') }}" aria-expanded="{{ Route::is('admin.contact.index') ? 'true' : 'false' }}" class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="message-square"></i>
+                        <span>Mesajlar</span>
+                    </div>
+                </a>
+            </li>
         </ul>
 
     </nav>
