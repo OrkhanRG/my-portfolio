@@ -21,7 +21,7 @@ class HomeController extends Controller
         $featuredServices = Service::query()->where('status', 1)->where('is_featured', 1)->get();
         $experiences = Experience::query()->where('status', 1)->get();
         $educations = Education::query()->where('status', 1)->get();
-        $skills = Skill::query()->where('status', 1)->get();
+        $skills = Skill::query()->where('status', 1)->orderBy('order', 'asc')->get();
 
         $totalMonth = 0;
         foreach ($experiences as $experience)

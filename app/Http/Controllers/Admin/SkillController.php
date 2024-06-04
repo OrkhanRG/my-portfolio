@@ -14,7 +14,7 @@ class SkillController extends Controller
      */
     public function index()
     {
-        $skills = Skill::query()->orderBy('id', 'desc')->paginate(10);
+        $skills = Skill::query()->orderBy('order', 'asc')->paginate(10);
         return view('admin.skill.index', compact('skills'));
     }
 
@@ -38,7 +38,7 @@ class SkillController extends Controller
             'image' => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
         ]);
 
-        $data = $request->only('name', 'proficiency');
+        $data = $request->only('name', 'proficiency', 'order');
 
         if ($request->hasFile('image'))
         {
@@ -97,7 +97,7 @@ class SkillController extends Controller
                 ->withInput();
         }
 
-        $data = $request->only('name', 'proficiency');
+        $data = $request->only('name', 'proficiency', 'order');
         $data['image'] = $skill->image;
 
         if ($request->hasFile('image'))

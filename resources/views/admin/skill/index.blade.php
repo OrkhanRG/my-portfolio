@@ -22,6 +22,7 @@
                         <th scope="col"><b>Şəkil</b></th>
                         <th scope="col"><b>Bacarıq Adı</b></th>
                         <th scope="col"><b>Səviyyə | %</b></th>
+                        <th scope="col"><b>Sıra №</b></th>
                         <th class="text-center" scope="col"><b>Status</b></th>
                         <th class="text-center" scope="col"><b>Action</b></th>
                     </tr>
@@ -38,6 +39,7 @@
                             </td>
                             <td>{{ $skill->name }}</td>
                             <td><b class="text-warning">{{ $skill->proficiency }}%</b></td>
+                            <td>{{ $skill->order }}</td>
                             <td class="text-center">
                                 <span class="badge badge-light-{{ $skill->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $skill->id }}">
                                    {{ $skill->status ? 'Aktiv' : 'Passiv' }}

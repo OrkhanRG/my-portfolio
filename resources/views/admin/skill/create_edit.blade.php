@@ -27,7 +27,7 @@
                         @method('PUT')
                     @endisset
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Ad</label>
                                 <input type="text" class="form-control mb-2"
@@ -39,7 +39,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="start_date">Bacarıq Səviyyəsi</label>
                                 <input type="number" class="form-control mb-2"
@@ -51,6 +51,17 @@
                             @enderror
                         </div>
 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="start_date">Sıra №</label>
+                                <input type="number" class="form-control mb-2"
+                                       name='order' id="order" placeholder="Sıra nömrəsin daxil edin"
+                                       value="{{ $skill->order ?? old('order') }}">
+                            </div>
+                            @error('order')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         <div class="col-md-12 mt-2">
                             <div class="row">
