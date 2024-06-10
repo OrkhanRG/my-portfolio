@@ -41,7 +41,7 @@ class CompanyController extends Controller
         if ($request->hasFile('logo')) {
             $filePath = 'assets/img/company/';
             $file = $request->file('logo');
-            fileUpload($file, $filePath, $data['name']);
+            $data['logo'] = fileUpload($file, $filePath, $data['name']);
         }
 
         Company::query()->create($data);

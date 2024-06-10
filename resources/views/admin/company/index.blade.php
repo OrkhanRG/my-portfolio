@@ -31,7 +31,7 @@
                             <td width="10">
                                 <div class="media">
                                     <div class="avatar me-2">
-                                        <img alt="avatar-{{ $company->name }}" src="{{ asset($company->image) }}" class="rounded-circle">
+                                        <img alt="avatar-{{ $company->name }}" src="{{ asset($company->logo) }}" class="rounded-circle">
                                     </div>
                                 </div>
                             </td>
