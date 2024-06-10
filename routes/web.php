@@ -1,23 +1,28 @@
 <?php
 
+//admin
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SkillController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
-
-//admin
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\ExperienceController;
-use App\Http\Controllers\Admin\EducationController;
-use App\Http\Controllers\Admin\SkillController;
-use App\Http\Controllers\ContactController as AdminContactController;
-
 //front
 use App\Http\Controllers\Front\BlogController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProjectController;
 use Illuminate\Support\Facades\Route;
+
+/*
+ *
+ *
+ *
+ * */
 
 Route::name('front.')->middleware('about')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -67,6 +72,10 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
 
     //contact
     Route::resource('/contact', AdminContactController::class);
+
+    //company
+    Route::resource('/company', CompanyController::class);
+    Route::post('/company/change-status', [CompanyController::class, 'changeStatus'])->name('company.change-status');
 });
 
 
