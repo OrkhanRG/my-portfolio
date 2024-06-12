@@ -71,7 +71,33 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:3'],
+            'logo' => ['nullable', 'sometimes', 'image', 'mimes:png,jpg,jpeg,webp,gif', 'max:2048']
+        ]);
+
+        $company = Company::query()->find($id);
+
+        $data = $request->only('name');
+        $data['status'] = $request->has('status');
+        $data['logo'] = $company->logo;
+
+        if ($request->hasFile('logo')) {
+
+            if (file_exists($data['logo']))
+            {
+                unlink($data['logo']);
+            }
+
+            $filePath = 'assets/img/company/';
+            $file = $request->file('logo');
+            $data['logo'] = fileUpload($file, $filePath, $data['name']);
+        }
+
+        $company->update($data);
+
+        toast('Şirkət məlumatları güncəlləndi!','success');
+        return redirect()->back();
     }
 
     /**
