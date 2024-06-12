@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary _effect--ripple waves-effect waves-light">Yarat</button>
+                    <button type="submit" class="btn btn-primary _effect--ripple waves-effect waves-light">{{ isset($company) ? 'Güncəllə' : 'Yarat' }}</button>
                 </form>
             </div>
         </div>

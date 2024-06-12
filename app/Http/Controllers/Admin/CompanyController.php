@@ -105,6 +105,40 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Company::query()->find($id);
+
+        if (!$company)
+        {
+            return response()->json([
+                'error' => 'Şirkət silinmədi!'
+            ], 404);
+        }
+
+        $delete = $company->delete();
+
+        return  response()->json([
+            'success' => 'Şirkət Silindi!',
+            'status' => $delete
+        ], 200);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $id = $request->only('id');
+        $company = Company::query()->where('id', $id)->first();
+
+        if (!$company)
+        {
+            return response()->json([
+                'error' => 'Şirkət tapılmadı!'
+            ], 404);
+        }
+
+        $company->update(['status' => !$company->status]);
+
+        return  response()->json([
+            'success' => 'Şirkət statusu dəyişdirildi!',
+            'data' => $company
+        ], 200);
     }
 }
