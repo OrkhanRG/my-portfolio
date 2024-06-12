@@ -599,36 +599,11 @@
                 </div>
             </div>
             <div class="client-logo-wrap">
-                <a class="client-logo-item wow fadeInUp delay-0-2s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo1.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-3s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo2.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-4s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo3.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-5s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo4.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-6s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo5.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-2s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo6.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-3s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo7.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-4s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo8.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-5s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo9.png') }}" alt="Client Logo">
-                </a>
-                <a class="client-logo-item wow fadeInUp delay-0-6s" href="contact.html">
-                    <img src="{{ asset('assets/images/client-logos/client-logo10.png') }}" alt="Client Logo">
-                </a>
+                @foreach($companies as $company)
+                    <a class="client-logo-item wow fadeInUp delay-0-2s" href="javascript:void(0)">
+                        <img width="170" src="{{ asset($company->logo) }}" alt="Client Logo">
+                    </a>
+                @endforeach
             </div>
         </div>
         <div class="bg-lines">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Company;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Service;
@@ -22,6 +23,7 @@ class HomeController extends Controller
         $experiences = Experience::query()->where('status', 1)->get();
         $educations = Education::query()->where('status', 1)->get();
         $skills = Skill::query()->where('status', 1)->orderBy('order', 'asc')->get();
+        $companies = Company::query()->where('status', 1)->get();
 
         $totalMonth = 0;
         foreach ($experiences as $experience)
@@ -45,6 +47,7 @@ class HomeController extends Controller
             'totalExperience' => $totalExperience,
             'educations' => $educations,
             'skills' => $skills,
+            'companies' => $companies,
         ]);
     }
 }
