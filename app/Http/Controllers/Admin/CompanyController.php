@@ -62,7 +62,8 @@ class CompanyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $company = Company::query()->find($id);
+        return view('admin.company.create_edit', compact('company'));
     }
 
     /**

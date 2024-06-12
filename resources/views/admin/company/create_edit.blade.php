@@ -27,12 +27,15 @@
                         @method('PUT')
                     @endisset
                     <div class="row">
-                        <div class="col-md-9">
+                        <div  @class([
+                                            'col-md-9' => isset($company),
+                                            'col-md-12' => !isset($company),
+                                            ])>
                             <div class="form-group">
                                 <label for="name">Ad</label>
                                 <input type="text" class="form-control mb-2"
                                        name='name' id="name" placeholder="Ad"
-                                       value="{{ $company->name ?? old('name') }}">
+                                       value="{{ $company->name ?? old('name') }}" >
                             </div>
                             @error('name')
                             <span class="text-danger">{{ $message }}</span>
@@ -41,7 +44,10 @@
 
                         <div class="col-md-12 mt-2">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div @class([
+                                                        'col-md-9' => isset($company),
+                                                        'col-md-12' => !isset($company),
+]                                                       )>
                                     <div class="form-group">
                                         <label for="logo">Şəkil</label>
                                         <input
@@ -64,13 +70,15 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-3">
-                                    @if(isset($company) && $company->image)
-                                        <img width="150" id="imgHeroPreview" src="{{ asset($company->image) }}" alt="">
-                                    @else
-                                        <img width="150" src="{{ asset('/assets/img/default/img/hero.png') }}" alt="">
-                                    @endif
-                                </div>
+                                @isset($company)
+                                    <div class="col-md-3">
+                                        @if(isset($company) && $company->logo)
+                                            <img width="150" id="imgPreview" src="{{ asset($company->logo) }}" alt="">
+                                        @else
+                                            <img width="150" src="{{ asset('/assets/img/default/img/hero.png') }}" alt="">
+                                        @endif
+                                    </div>
+                                @endisset
                             </div>
                         </div>
                     </div>
@@ -83,11 +91,11 @@
 
 @push('js')
     <script>
-        let image = document.querySelector('#image');
+        let image = document.querySelector('#logo');
 
         image.addEventListener('change', function (event) {
             let element = event.target;
-            previewImage(element, 'imgAboutPreview')
+            previewImage(element, 'imgPreview')
         });
 
         function previewImage(element, imgSrc) {
