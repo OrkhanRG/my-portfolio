@@ -139,6 +139,26 @@
             </li>
 
             <li class="menu">
+                <a href="#category" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.category.index', 'admin.category.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
+                    <div class="">
+                        <i data-feather="layout"></i>
+                        <span>Kateqoriyalar</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled {{ Route::is('admin.category.index', 'admin.category.create') ? 'show' : '' }}" id="category" data-bs-parent="#accordionExample">
+                    <li class="{{ Route::is('admin.category.index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.category.index') }}"> Kateqoriyalar</a>
+                    </li>
+                    <li class="{{ Route::is('admin.category.create') ? 'active' : '' }}">
+                        <a href="{{ route('admin.category.create') }}">Yeni Kateqoriya Yarat</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
                 <a href="#company" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.company.index', 'admin.company.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
                     <div class="">
                         <i data-feather="life-buoy"></i>

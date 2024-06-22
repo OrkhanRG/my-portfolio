@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SkillController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
@@ -47,10 +48,14 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     Route::get('/cv-download', [DashboardController::class, 'cvDownload'])->name('cv-download');
     Route::post('/cv-upload', [DashboardController::class, 'cvUpload'])->name('cv-upload');
 
-    //Services
+    //services
     Route::resource('/service', ServiceController::class);
     Route::post('/service/change-status', [ServiceController::class, 'changeStatus'])->name('service.change-status');
     Route::post('/service/change-is-featured', [ServiceController::class, 'changeIsFeatured'])->name('service.change-is-featured');
+
+    //category
+    Route::resource('/category', CategoryController::class);
+    Route::post('/category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
 
     //about
     Route::prefix('about')->name('about.')->group(function () {
