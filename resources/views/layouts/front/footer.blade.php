@@ -49,10 +49,10 @@
                 </div>
                 <div class="col-lg-6 text-lg-end">
                     <ul class="footer-bottom-nav">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a target="_blank" href="{{ $about->facebook }}">Facebook</a></li>
+                        <li><a target="_blank" href="{{ $about->instagram }}">Instagram</a></li>
+                        <li><a target="_blank" href="{{ $about->linkedin }}">LinkedIn</a></li>
+                        <li><a target="_blank" href="{{ $about->github }}">GitHub</a></li>
                     </ul>
                 </div>
             </div>

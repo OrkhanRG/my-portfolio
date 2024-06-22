@@ -600,7 +600,7 @@
             </div>
             <div class="client-logo-wrap">
                 @foreach($companies as $company)
-                    <a class="client-logo-item wow fadeInUp delay-0-2s" href="javascript:void(0)">
+                    <a class="client-logo-item wow fadeInUp delay-0-2s" target="_blank" href="{{ $company->url ?? '#' }}">
                         <img width="170" src="{{ asset($company->logo) }}" alt="Client Logo">
                     </a>
                 @endforeach

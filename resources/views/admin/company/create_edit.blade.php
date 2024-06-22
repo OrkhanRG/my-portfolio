@@ -27,6 +27,17 @@
                         @method('PUT')
                     @endisset
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="url">URL</label>
+                                <input type="text" class="form-control mb-2"
+                                       name='url' id="url" placeholder="URL"
+                                       value="{{ $company->url ?? old('url') }}" >
+                            </div>
+                            @error('url')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div  @class([
                                             'col-md-9' => isset($company),
                                             'col-md-12' => !isset($company),

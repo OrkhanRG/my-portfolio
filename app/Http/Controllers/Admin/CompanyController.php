@@ -35,7 +35,7 @@ class CompanyController extends Controller
             'logo' => ['nullable', 'sometimes', 'image', 'mimes:png,jpg,jpeg,webp,gif', 'max:2048']
         ]);
 
-        $data = $request->only('name');
+        $data = $request->only('name', 'url');
         $data['status'] = $request->has('status');
 
         if ($request->hasFile('logo')) {
@@ -78,7 +78,7 @@ class CompanyController extends Controller
 
         $company = Company::query()->find($id);
 
-        $data = $request->only('name');
+        $data = $request->only('name', 'url');
         $data['status'] = $request->has('status');
         $data['logo'] = $company->logo;
 
