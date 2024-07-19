@@ -59,6 +59,26 @@
             </li>
 
             <li class="menu">
+                <a href="#project" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.project.index', 'admin.project.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
+                    <div class="">
+                        <i data-feather="folder"></i>
+                        <span>Layihələr</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled {{ Route::is('admin.project.index', 'admin.project.create') ? 'show' : '' }}" id="project" data-bs-parent="#accordionExample">
+                    <li class="{{ Route::is('admin.project.index') ? 'active' : '' }}">
+                        <a href="{{ route('admin.project.index') }}"> Layihələr </a>
+                    </li>
+                    <li class="{{ Route::is('admin.project.create') ? 'active' : '' }}">
+                        <a href="{{ route('admin.project.create') }}">Yeni Layihə Yarat</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu">
                 <a href="#service" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.service.index', 'admin.service.create') ? 'true' : 'false' }}" class="dropdown-toggle active">
                     <div class="">
                         <i data-feather="server"></i>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
 //front
@@ -57,6 +58,10 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     Route::resource('/category', CategoryController::class);
     Route::post('/category/change-status', [CategoryController::class, 'changeStatus'])->name('category.change-status');
 
+    //project
+    Route::resource('/project', AdminProjectController::class);
+    Route::post('/project/change-status', [AdminProjectController::class, 'changeStatus'])->name('project.change-status');
+
     //about
     Route::prefix('about')->name('about.')->group(function () {
         Route::get('/', [AboutController::class, 'index'])->name('index');
@@ -67,7 +72,7 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     Route::resource('/experience', ExperienceController::class);
     Route::post('/experience/change-status', [ExperienceController::class, 'changeStatus'])->name('experience.change-status');
 
-    //experience
+    //education
     Route::resource('/education', EducationController::class);
     Route::post('/education/change-status', [EducationController::class, 'changeStatus'])->name('education.change-status');
 
