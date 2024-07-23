@@ -106,8 +106,9 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $project = Project::query()->where('id', $id)->firstOrFail();
+        $categories = Category::query()->get();
 
-        return view('admin.project.create_edit', compact('project'));
+        return view('admin.project.create_edit', compact('project', 'categories'));
     }
 
     /**

@@ -20,7 +20,7 @@ class HomeController extends Controller
         $user = User::query()->find(1);
         $services = Service::query()->where('status', 1)->get();
         $featuredServices = Service::query()->where('status', 1)->where('is_featured', 1)->get();
-        $experiences = Experience::query()->where('status', 1)->get();
+        $experiences = Experience::query()->where('status', 1)->orderBy('start_date', 'ASC')->get();
         $educations = Education::query()->where('status', 1)->get();
         $skills = Skill::query()->where('status', 1)->orderBy('order', 'asc')->get();
         $companies = Company::query()->where('status', 1)->get();
@@ -29,7 +29,7 @@ class HomeController extends Controller
         foreach ($experiences as $experience)
         {
             $start_date = Carbon::make($experience->start_date);
-            $end_date = Carbon::make($experience->end_date);
+            $end_date = Carbon::make($experience->end_date ?? now());
             $totalMonth += $end_date->diffInMonths(Carbon::parse($start_date));;
         }
         $year = floor($totalMonth/12);
