@@ -21,6 +21,8 @@
                     <tr>
                         <th scope="col"><b>Başlıq</b></th>
                         <th scope="col"><b>Kateqoriya</b></th>
+                        <th scope="col"><b>Müştəri</b></th>
+                        <th scope="col"><b>Ünvan</b></th>
                         <th scope="col"><b>URL</b></th>
                         <th scope="col"><b>Yayınlanma Tarixi</b></th>
                         <th class="text-center" scope="col"><b>Status</b></th>
@@ -30,8 +32,17 @@
                     <tbody>
                     @foreach($projects as $project)
                         <tr id="row-{{ $project->id }}">
+                            <td>{{ $project->title }}</td>
                             <td>{{ $project->category->name }}</td>
-                            <td>{{ $project->category->url }}</td>
+                            <td>{{ $project->client }}</td>
+                            <td>{{ $project->location }}</td>
+                            <td class="text-center">
+                                @if($project->url)
+                                    <a href="{{ $project->url }}"></a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td>{{ $project->publish_date }}</td>
                             <td class="text-center">
                                 <span class="badge badge-light-{{ $project->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $project->id }}">

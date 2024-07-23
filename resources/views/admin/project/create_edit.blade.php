@@ -58,9 +58,9 @@
                             <div class="form-group">
                                 <label for="start_date">Kateqoriya</label>
                                 <select class="form-control" name="category_id" id="category_id">
+                                    <option value="">Kateqoriya seç</option>
                                     @foreach($categories as $category)
-                                        <option value="">Kateqoriya seç</option>
-                                        <option value="{{ $category->id }} {{ isset($project) && $category->id === $project->category_id ? 'selected' : (old('category_id') ? 'selected' : '') }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ isset($project) && $category->id === $project->category_id ? 'selected' : (old('category_id') ? 'selected' : '') }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -176,7 +176,7 @@
                                            data-allow-reorder="true">
                                 </div>
                             </div>
-                            @error('main_image')
+                            @error('images')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -214,6 +214,10 @@
         var f1 = flatpickr(document.getElementById('publish_date'), {
             enableTime: true,
             dateFormat: "Y-m-d H:i",
+        });
+
+        FilePond.setOptions({
+            storeAsFile: true
         });
 
         FilePond.registerPlugin(

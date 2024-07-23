@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProjectStoreRequest;
+use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::query()->orderBy('order', 'asc')->paginate(10);
+        $projects = Project::query()->orderBy('id', 'asc')->paginate(10);
         return view('admin.project.index', compact('projects'));
     }
 
@@ -31,30 +34,61 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectStoreRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'min:3'],
-            'proficiency' => ['sometimes', 'nullable', 'integer', 'min:0', 'max:100'],
-            'image' => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
-        ]);
-
-        $data = $request->only('name', 'proficiency', 'order');
-
-        if ($request->hasFile('image'))
-        {
-            $file = $request->file('image');
-            $filePath = 'assets/img/projects/';
-            $extension = '.'.$file->getClientOriginalExtension();
-            $name = Str::slug($data['name'].'-'.date('YmdHis')).$extension;
-            $file->move(public_path($filePath), $name);
-            $data['image'] = $filePath.$name;
-        }
-
+        $data = $request->only('title', 'category_id', 'client', 'publish_date', 'description', 'short_description', 'location', 'url');
         $data['status'] = $request->has('status');
 
-        Project::query()->create($data);
+        if ($request->slug) {
+            $slug = Str::slug($request->slug);
+            $project = Project::query()->where('slug', $slug)->first();
+            if ($project) {
+                alert()->error('Diqqət', 'Daxil etdiyin slug hazırda mövcuddur!');
+                return back()->withInput();
+            }
+        } else {
+            $slug = Str::slug($data['title']);
+            $project = Project::query()->where('slug', $slug)->first();
+            if ($project) {
+                $slug = Str::slug('title' . '-' . date('YmdHis'));
+            }
+        }
 
+        $data['slug'] = $slug;
+
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = 'assets/img/projects/main_images/';
+            $name = $data['title'];
+            $data['main_image'] = fileUpload($file, $path, $name);
+        }
+
+        $project = Project::query()->create($data);
+
+        if (!$project) {
+            alert()->error('Diqqət', 'Layihə yaradılan zaman xəta baş verdi!');
+            return back()->withInput();
+        }
+
+        if ($request->hasFile('images')) {
+            $image_list = [];
+            foreach ($request->file('images') as $key => $image) {
+                $path = 'assets/img/projects/images/';
+                $name = $data['title'] . '-' . $key;
+                $image_list[] = [
+                    'project_id' => $project->id,
+                    'path' => fileUpload($image, $path, $name),
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+            if (count($image_list))
+            {
+                Image::query()->insert($image_list);
+            }
+        }
+
+        alert()->success('Təbriklər!', 'Layihə yaradıldı!');
         return redirect()->route('admin.project.index');
     }
 
@@ -79,19 +113,18 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjectUpdateRequest $request, string $id)
     {
         $regex = "/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/";
         $request->validate([
             'name' => ['required', 'min:3'],
-            'proficiency' => ['sometimes', 'nullable', 'integer', 'regex:'.$regex, 'min:0', 'max:100'],
+            'proficiency' => ['sometimes', 'nullable', 'integer', 'regex:' . $regex, 'min:0', 'max:100'],
             'image' => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
         ]);
 
         $project = Project::query()->where('id', $id)->first();
 
-        if (!$project)
-        {
+        if (!$project) {
             return redirect()
                 ->back()
                 ->withErrors('Bacarıq tapılmadı!')
@@ -101,20 +134,18 @@ class ProjectController extends Controller
         $data = $request->only('name', 'proficiency', 'order');
         $data['image'] = $project->image;
 
-        if ($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filePath = 'assets/img/projects/';
-            $extension = '.'.$file->getClientOriginalExtension();
-            $name = Str::slug($data['name'].'-'.date('YmdHis')).$extension;
+            $extension = '.' . $file->getClientOriginalExtension();
+            $name = Str::slug($data['name'] . '-' . date('YmdHis')) . $extension;
 
-            if (!is_null($project->image) && file_exists($project->image))
-            {
+            if (!is_null($project->image) && file_exists($project->image)) {
                 unlink($project->image);
             }
 
             $file->move(public_path($filePath), $name);
-            $data['image'] = $filePath.$name;
+            $data['image'] = $filePath . $name;
         }
 
         $data['status'] = $request->has('status');
@@ -133,8 +164,7 @@ class ProjectController extends Controller
     {
         $project = Project::query()->find($id);
 
-        if (!$project)
-        {
+        if (!$project) {
             return response()->json([
                 'error' => 'Bacarıq silinmədi!'
             ], 404);
@@ -142,7 +172,7 @@ class ProjectController extends Controller
 
         $delete = $project->delete();
 
-        return  response()->json([
+        return response()->json([
             'success' => 'Bacarıq Silindi!',
             'status' => $delete
         ], 200);
@@ -153,8 +183,7 @@ class ProjectController extends Controller
         $id = $request->only('id');
         $project = Project::query()->where('id', $id)->first();
 
-        if (!$project)
-        {
+        if (!$project) {
             return response()->json([
                 'error' => 'Bacarıq tapılmadı!'
             ], 404);
@@ -162,7 +191,7 @@ class ProjectController extends Controller
 
         $project->update(['status' => !$project->status]);
 
-        return  response()->json([
+        return response()->json([
             'success' => 'Status dəyişdirildi!',
             'data' => $project
         ], 200);

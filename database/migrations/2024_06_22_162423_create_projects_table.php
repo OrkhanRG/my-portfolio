@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('status')->nullable()->default(0);
             $table->string('location')->nullable();
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->date('publish_date')->nullable();
             $table->timestamps();
         });
