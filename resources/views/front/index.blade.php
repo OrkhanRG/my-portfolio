@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-xl-8 col-lg-9">
                             <div class="section-title mb-60 wow fadeInUp delay-0-2s">
-                                <span class="sub-title mb-15">CV</span>
+                                <span class="sub-title mb-15">Təcrübə</span>
                                 <h2><span>Real</span> Təcrübə</h2>
                             </div>
                         </div>
@@ -447,7 +447,7 @@
                 <div class="col-lg-4">
                     <div class="contact-content-part pt-5 rpt-0 rmb-55 wow fadeInUp delay-0-2s">
                         <div class="section-title mb-40">
-                            <span class="sub-title mb-15">Mənimlə Əlaqə Saxla</span>
+                            <span class="sub-title mb-15">Mənimlə Əlaqə</span>
                             <h2><span>Növbəti Layihələriniz</span> Üçün Mənimlə Danışın </h2>
                             <p>Sağ tərəfdə olan formu dolduraraq mənimlə əlaqə saxlaya bilərsiz.</p>
                         </div>

@@ -24,7 +24,7 @@ class ProjectUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'slug' => ['sometimes', 'nullable', 'unique:projects,slug,'.$this->project->id],
+            'slug' => ['sometimes', 'nullable', 'unique:projects,slug,'.$this->project],
             'category_id' => ['required', 'integer'],
             'main_image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp,bmp'],
             'images.*' => ['required', 'image', 'mimes:png,jpg,jpeg,webp,bmp'],

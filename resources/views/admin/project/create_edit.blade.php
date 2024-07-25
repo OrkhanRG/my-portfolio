@@ -60,7 +60,7 @@
                                 <select class="form-control" name="category_id" id="category_id">
                                     <option value="">Kateqoriya seç</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ isset($project) && $category->id === $project->category_id ? 'selected' : (old('category_id') ? 'selected' : '') }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ isset($project) && $category->id === $project->category_id ? 'selected' : (old('category_id') ? 'selected' : '') }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -213,7 +213,8 @@
     <script>
         var f1 = flatpickr(document.getElementById('publish_date'), {
             enableTime: true,
-            dateFormat: "Y-m-d H:i",
+            dateFormat: "Y-m-d",
+            defaultDate: "{{ $project->publish_date ?? '' }}"
         });
 
         FilePond.setOptions({
@@ -230,7 +231,8 @@
             FilePondPluginFileValidateSize,
         );
 
-        FilePond.create(
+        const main_image = "{{ asset($project->main_image) ?? '' }}";
+        const pondMImage = FilePond.create(
             document.querySelector('.filepond1'),
             {
                 imagePreviewHeight: 170,
@@ -240,12 +242,28 @@
                 styleProgressIndicatorPosition: 'right bottom',
                 styleButtonRemoveItemPosition: 'left bottom',
                 styleButtonProcessItemPosition: 'right bottom',
+                file: {
+                    source: main_image,
+                    options: {
+                        type: 'local'
+                    }
+                }
             }
         );
 
-        FilePond.create(
+        @isset($project->main_image)
+            pondMImage.addFile("{{ asset($project->main_image) }}");
+        @endisset
+
+        const pondImages = FilePond.create(
             document.querySelector('.file-upload-multiple')
         );
+
+        @if(isset($images) && count($images))
+            @foreach($images as $image)
+                pondImages.addFile("{{ asset($image) }}");
+            @endforeach
+        @endif
     </script>
 {{--    <script>--}}
 {{--        let image = document.querySelector('#image');--}}

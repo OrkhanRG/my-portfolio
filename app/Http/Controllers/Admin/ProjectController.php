@@ -41,11 +41,6 @@ class ProjectController extends Controller
 
         if ($request->slug) {
             $slug = Str::slug($request->slug);
-            $project = Project::query()->where('slug', $slug)->first();
-            if ($project) {
-                alert()->error('Diqqət', 'Daxil etdiyin slug hazırda mövcuddur!');
-                return back()->withInput();
-            }
         } else {
             $slug = Str::slug($data['title']);
             $project = Project::query()->where('slug', $slug)->first();
@@ -106,9 +101,10 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $project = Project::query()->where('id', $id)->firstOrFail();
+        $images = Image::query()->where('project_id', $id)->pluck('path')->toArray();
         $categories = Category::query()->get();
 
-        return view('admin.project.create_edit', compact('project', 'categories'));
+        return view('admin.project.create_edit', compact('project', 'categories', 'images'));
     }
 
     /**
@@ -116,46 +112,96 @@ class ProjectController extends Controller
      */
     public function update(ProjectUpdateRequest $request, string $id)
     {
-        $regex = "/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/";
-        $request->validate([
-            'name' => ['required', 'min:3'],
-            'proficiency' => ['sometimes', 'nullable', 'integer', 'regex:' . $regex, 'min:0', 'max:100'],
-            'image' => ['sometimes', 'nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
-        ]);
-
-        $project = Project::query()->where('id', $id)->first();
-
-        if (!$project) {
-            return redirect()
-                ->back()
-                ->withErrors('Bacarıq tapılmadı!')
-                ->withInput();
-        }
-
-        $data = $request->only('name', 'proficiency', 'order');
-        $data['image'] = $project->image;
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filePath = 'assets/img/projects/';
-            $extension = '.' . $file->getClientOriginalExtension();
-            $name = Str::slug($data['name'] . '-' . date('YmdHis')) . $extension;
-
-            if (!is_null($project->image) && file_exists($project->image)) {
-                unlink($project->image);
-            }
-
-            $file->move(public_path($filePath), $name);
-            $data['image'] = $filePath . $name;
-        }
-
+        $data = $request->only('title', 'category_id', 'client', 'publish_date', 'description', 'short_description', 'location', 'url');
         $data['status'] = $request->has('status');
 
-        $project->update($data);
+        $project = Project::query()->findOrFail($id);
+        $project_id = $project->id;
+//        dd($project->id);
 
-        return redirect()
-            ->back()
-            ->withSuccess('Bacarıq güncəlləndi!');
+        $image_list = [];
+        $data['main_image'] = $project->main_image;
+        $images_query = Image::query()->where('project_id', $project->id);
+        $images = $images_query->get();
+
+        if (count($images)) {
+            foreach ($images as $image) {
+                $image_list[] = [
+                    'project_id' => $image->project_id,
+                    'path' => $image->path
+                ];
+            }
+        }
+
+        if ($request->slug) {
+            $slug = Str::slug($request->slug);
+
+            if ($slug === $project->slug) {
+                $slug = Str::slug($data['title']);
+                $project = Project::query()->where('slug', $slug)->first();
+                if ($project) {
+                    $slug = Str::slug('title' . '-' . date('YmdHis'));
+                }
+            }
+        } else {
+            $slug = Str::slug($data['title']);
+            $project = Project::query()->where('slug', $slug)->first();
+            if ($project) {
+                $slug = Str::slug('title' . '-' . date('YmdHis'));
+            }
+        }
+
+        $data['slug'] = $slug;
+
+        if ($request->hasFile('main_image')) {
+            $file = $request->file('main_image');
+            $path = 'assets/img/projects/main_images/';
+            $name = $data['title'];
+
+            if($data['main_image'] && file_exists($data['main_image'])) {
+                unlink($data['main_image']);
+            }
+
+            $data['main_image'] = fileUpload($file, $path, $name);
+        }
+
+        $update = Project::query()->update($data);
+
+        if (!$update) {
+            alert()->error('Diqqət', 'Layihə güncəlləmə zamanı xəta baş verdi!');
+            return back()->withInput();
+        }
+
+        if ($request->hasFile('images')) {
+
+            if (count($image_list)) {
+                foreach ($image_list as $old_image) {
+                    if (file_exists($old_image['path'])){
+                        unlink($old_image['path']);
+                    }
+                }
+                $images_query->delete();
+            }
+
+            $image_list = [];
+            foreach ($request->file('images') as $key => $image) {
+                $path = 'assets/img/projects/images/';
+                $name = $data['title'] . '-' . $key;
+                $image_list[] = [
+                    'project_id' => $project_id,
+                    'path' => fileUpload($image, $path, $name),
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+            if (count($image_list))
+            {
+                Image::query()->insert($image_list);
+            }
+        }
+
+        alert()->success('Təbriklər!', 'Layihə güncəlləndi!');
+        return redirect()->back();
     }
 
     /**
