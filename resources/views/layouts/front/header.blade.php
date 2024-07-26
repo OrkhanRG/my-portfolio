@@ -44,7 +44,7 @@
                     <!-- menu sidbar -->
                     <div class="menu-sidebar">
                         <button>
-                            <img src="assets/images/shape/sidebar-tottler.svg" alt="Toggler">
+                            <img src="{{ asset('assets/images/shape/sidebar-tottler.svg') }}" alt="Toggler">
                         </button>
                     </div>
                 </div>

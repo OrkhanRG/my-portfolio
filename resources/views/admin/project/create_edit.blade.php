@@ -231,7 +231,6 @@
             FilePondPluginFileValidateSize,
         );
 
-        const main_image = "{{ asset($project->main_image) ?? '' }}";
         const pondMImage = FilePond.create(
             document.querySelector('.filepond1'),
             {
@@ -242,12 +241,6 @@
                 styleProgressIndicatorPosition: 'right bottom',
                 styleButtonRemoveItemPosition: 'left bottom',
                 styleButtonProcessItemPosition: 'right bottom',
-                file: {
-                    source: main_image,
-                    options: {
-                        type: 'local'
-                    }
-                }
             }
         );
 
@@ -265,22 +258,5 @@
             @endforeach
         @endif
     </script>
-{{--    <script>--}}
-{{--        let image = document.querySelector('#image');--}}
 
-{{--        image.addEventListener('change', function (event) {--}}
-{{--            let element = event.target;--}}
-{{--            previewImage(element, 'imgAboutPreview')--}}
-{{--        });--}}
-
-{{--        function previewImage(element, imgSrc) {--}}
-{{--            var reader = new FileReader();--}}
-{{--            reader.onload = function(){--}}
-{{--                var img = document.getElementById(imgSrc);--}}
-{{--                img.src = reader.result;--}}
-{{--                img.style.display = 'block';--}}
-{{--            };--}}
-{{--            reader.readAsDataURL(element.files[0]);--}}
-{{--        }--}}
-{{--    </script>--}}
 @endpush

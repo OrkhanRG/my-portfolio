@@ -5,7 +5,7 @@
                 <div class="col-lg-2 col-md-12">
                     <div class="footer-widget widget_logo wow fadeInUp delay-0-2s">
                         <div class="footer-logo">
-                            <a href="index.html"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo"></a>
+                            <a href="{{ route('front.index') }}"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo"></a>
                         </div>
                     </div>
                 </div>
@@ -13,9 +13,9 @@
                     <div class="footer-widget widget_nav_menu wow fadeInUp delay-0-4s">
                         <h6 class="footer-title">Sürətli Keçid</h6>
                         <ul>
-                            <li><a href="services.html">Xidmətlər</a></li>
-                            <li><a href="projects.html">Layihələr</a></li>
-                            <li><a href="contact.html">Əlaqə</a></li>
+                            <li><a href="{{ route('front.blogs') }}">Bloqlar</a></li>
+                            <li><a href="{{ route('front.projects') }}">Layihələr</a></li>
+                            <li><a href="{{ route('front.contact') }}">Əlaqə</a></li>
                         </ul>
                     </div>
                     <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="copyright-text">
-                        <p>Copyright {{ date('Y') }} <a href="javascript:void(0)">OrkhaN</a> Bütün hüquqlar qorunur</p>
+                        <p>Copyright {{ date('Y') }} <a href="{{ $about->github }}" target="_blank">OrkhaN</a> Bütün hüquqlar qorunur</p>
                     </div>
                 </div>
                 <div class="col-lg-6 text-lg-end">

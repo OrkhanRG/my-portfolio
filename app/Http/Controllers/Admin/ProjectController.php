@@ -18,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::query()->orderBy('id', 'asc')->paginate(10);
+        $projects = Project::query()->with('category')->orderBy('id', 'desc')->paginate(10);
         return view('admin.project.index', compact('projects'));
     }
 
@@ -117,7 +117,6 @@ class ProjectController extends Controller
 
         $project = Project::query()->findOrFail($id);
         $project_id = $project->id;
-//        dd($project->id);
 
         $image_list = [];
         $data['main_image'] = $project->main_image;
@@ -132,22 +131,13 @@ class ProjectController extends Controller
                 ];
             }
         }
-
         if ($request->slug) {
             $slug = Str::slug($request->slug);
-
-            if ($slug === $project->slug) {
-                $slug = Str::slug($data['title']);
-                $project = Project::query()->where('slug', $slug)->first();
-                if ($project) {
-                    $slug = Str::slug('title' . '-' . date('YmdHis'));
-                }
-            }
         } else {
             $slug = Str::slug($data['title']);
             $project = Project::query()->where('slug', $slug)->first();
             if ($project) {
-                $slug = Str::slug('title' . '-' . date('YmdHis'));
+                $slug = Str::slug($data['title'] . '-' . date('YmdHis'));
             }
         }
 
@@ -165,7 +155,7 @@ class ProjectController extends Controller
             $data['main_image'] = fileUpload($file, $path, $name);
         }
 
-        $update = Project::query()->update($data);
+        $update = $project->update($data);
 
         if (!$update) {
             alert()->error('Diqqət', 'Layihə güncəlləmə zamanı xəta baş verdi!');

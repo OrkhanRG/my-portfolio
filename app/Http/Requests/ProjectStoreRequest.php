@@ -29,8 +29,8 @@ class ProjectStoreRequest extends FormRequest
             'main_image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp,bmp'],
             'images.*' => ['required', 'image', 'mimes:png,jpg,jpeg,webp,bmp'],
             'url' => ['sometimes', 'nullable', 'active_url'],
-            'description' => ['sometimes', 'nullable', 'max:700'],
-            'short_description' => ['sometimes', 'nullable', 'max:250'],
+//            'description' => ['sometimes', 'nullable', 'max:700'],
+//            'short_description' => ['sometimes', 'nullable', 'max:500'],
         ];
     }
 

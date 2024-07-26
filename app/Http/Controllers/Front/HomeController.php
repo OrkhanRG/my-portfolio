@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\Company;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Skill;
 use App\Models\User;
@@ -24,6 +25,13 @@ class HomeController extends Controller
         $educations = Education::query()->where('status', 1)->get();
         $skills = Skill::query()->where('status', 1)->orderBy('order', 'asc')->get();
         $companies = Company::query()->where('status', 1)->get();
+        $projects = Project::query()
+            ->with('category')
+            ->where('status', 1)
+            ->where('publish_date', '<=', date('Y-m-d'))
+            ->limit(4)
+            ->orderBy('id', 'desc')
+            ->get();
 
         $totalMonth = 0;
         foreach ($experiences as $experience)
@@ -48,6 +56,7 @@ class HomeController extends Controller
             'educations' => $educations,
             'skills' => $skills,
             'companies' => $companies,
+            'projects' => $projects,
         ]);
     }
 }

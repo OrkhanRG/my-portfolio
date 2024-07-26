@@ -28,7 +28,7 @@
                             <span class="counter-title">İllik Təcrübə</span>
                         </div>
                         <div class="counter-item counter-text-wrap">
-                            <span class="count-text k-plus" data-speed="3000" data-stop="8">0</span>
+                            <span class="count-text plus" data-speed="3000" data-stop="{{ count($projects) }}">0</span>
                             <span class="counter-title">Layihə Tamamlandı</span>
                         </div>
                         <div class="counter-item counter-text-wrap">
@@ -365,68 +365,27 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center pb-25">
-                <div class="col-lg-6">
-                    <div class="project-image wow fadeInLeft delay-0-2s">
-                        <img src="{{ asset('assets/images/projects/project1.jpg') }}" alt="Project">
+            @isset($projects)
+                @foreach($projects as $key => $project)
+                    <div class="row align-items-center pb-25">
+                        <div class="col-lg-6 @if($key % 2 == 1) order-lg-2 @endif">
+                            <div class="project-image wow fadeInLeft delay-0-2s">
+                                <img src="{{ asset($project->main_image) }}" alt="Project">
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 @if($key % 2 == 1) ms-auto @endif">
+                            <div class="project-content wow fadeInRight delay-0-2s">
+                                <span class="sub-title">{{ $project->category->name }}</span>
+                                <h2><a href="{{ route('front.project-details', $project->slug) }}">{{ $project->title }}</a></h2>
+                                <p>{!! $project->short_description !!}</p>
+                                <a href="{{ route('front.project-details', $project->slug) }}" class="details-btn"><i class="far fa-arrow-right"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-5 col-lg-6">
-                    <div class="project-content wow fadeInRight delay-0-2s">
-                        <span class="sub-title">Product Design</span>
-                        <h2><a href="project-details.html">Mobile Application Design</a></h2>
-                        <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis architecto beatae</p>
-                        <a href="project-details.html" class="details-btn"><i class="far fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center pb-25">
-                <div class="col-lg-6 order-lg-2">
-                    <div class="project-image wow fadeInLeft delay-0-2s">
-                        <img src="{{ asset('assets/images/projects/project2.jpg') }}" alt="Project">
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6 ms-auto">
-                    <div class="project-content wow fadeInRight delay-0-2s">
-                        <span class="sub-title">Product Design</span>
-                        <h2><a href="project-details.html">Website Makeup Design</a></h2>
-                        <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis architecto beatae</p>
-                        <a href="project-details.html" class="details-btn"><i class="far fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center pb-25">
-                <div class="col-lg-6">
-                    <div class="project-image wow fadeInLeft delay-0-2s">
-                        <img src="{{ asset('assets/images/projects/project3.jpg') }}" alt="Project">
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6">
-                    <div class="project-content wow fadeInRight delay-0-2s">
-                        <span class="sub-title">Product Design</span>
-                        <h2><a href="project-details.html">Brand Identity and Motion Design</a></h2>
-                        <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis architecto beatae</p>
-                        <a href="project-details.html" class="details-btn"><i class="far fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center pb-25">
-                <div class="col-lg-6 order-lg-2">
-                    <div class="project-image wow fadeInLeft delay-0-2s">
-                        <img src="{{ asset('assets/images/projects/project4.jpg') }}" alt="Project">
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6 ms-auto">
-                    <div class="project-content wow fadeInRight delay-0-2s">
-                        <span class="sub-title">Product Design</span>
-                        <h2><a href="project-details.html">Mobile Application Development</a></h2>
-                        <p>Sed ut perspiciatis unde omnin natus totam rem aperiam eaque inventore veritatis architecto beatae</p>
-                        <a href="project-details.html" class="details-btn"><i class="far fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
+                @endforeach
+            @endisset
             <div class="project-btn text-center wow fadeInUp delay-0-2s">
-                <a href="projects.html" class="theme-btn">Daha çox layihəyə baxın <i class="far fa-angle-right"></i></a>
+                <a href="{{ route('front.projects') }}" class="theme-btn">Daha çox layihəyə baxın <i class="far fa-angle-right"></i></a>
             </div>
         </div>
         <div class="bg-lines">

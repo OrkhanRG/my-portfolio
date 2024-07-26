@@ -9,11 +9,11 @@
     <section class="page-banner-area pt-200 rpt-140 pb-100 rpb-60 rel z-1 text-center">
         <div class="container">
             <div class="banner-inner text-white">
-                <h1 class="page-title wow fadeInUp delay-0-2s">Mobile Application Design</h1>
+                <h1 class="page-title wow fadeInUp delay-0-2s">{{ $project->title }}</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center wow fadeInUp delay-0-4s">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Mobile Application Design</li>
+                        <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Anasəhifə</a></li>
+                        <li class="breadcrumb-item active">{{ $project->title }}</li>
                     </ol>
                 </nav>
             </div>
@@ -33,70 +33,71 @@
     <section class="projects-details-area pt-40 pb-130 rpb-100 rel z-1">
         <div class="container">
             <div class="projects-details-image mb-50 wow fadeInUp delay-0-2s">
-                <img src="assets/images/projects/project-details.jpg" alt="Project Details">
+                <img src="{{ asset($project->main_image ?? '') }}" alt="{{ $project->title ?? '' }}">
             </div>
             <div class="row gap-120 mt-50 mb-40">
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-md-8">
                     <div class="project-details-content wow fadeInUp delay-0-2s">
                         <h3>Layihə Haqqında</h3>
-                        <p class="big-letter">sSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque seeney laudantium totam rem aperiam eaque ipsa quae abillo inventore veritatis</p>
-                        <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aufugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam estqui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid consequature</p>
+                        <p class="big-letter">{{ substr(strip_tags($project->description), 0, 1).strip_tags($project->description) }}</p>
                     </div>
                 </div>
                 <div class="col-lg-4 wow fadeInUp delay-0-4s">
-                    <div class="project-details-info rmb-55" style="background-image: url(assets/images/projects/project-info-bg.png);">
-                        <div class="pd-info-item">
-                            <span>Category</span>
-                            <h5>Product Design</h5>
-                        </div>
-                        <div class="pd-info-item">
-                            <span>Clients</span>
-                            <h5>X_Design Studio</h5>
-                        </div>
-                        <div class="pd-info-item">
-                            <span>Location</span>
-                            <h5>Melbourne, Australia</h5>
-                        </div>
-                        <div class="pd-info-item">
-                            <span>Published</span>
-                            <h5>September 25, 2023</h5>
-                        </div>
+                    <div class="project-details-info rmb-55" style="background-image: url({{ asset('assets/images/projects/project-info-bg.png') }});">
+                        @isset($project->category->name)
+                            <div class="pd-info-item">
+                                <span>Kateqoriya</span>
+                                <h5>{{ $project->category->name }}</h5>
+                            </div>
+                        @endisset
+                        @isset($project->client)
+                            <div class="pd-info-item">
+                                <span>Müştəri</span>
+                                <h5>{{ $project->client }}</h5>
+                            </div>
+                        @endisset
+                        @isset($project->location)
+                            <div class="pd-info-item">
+                                <span>Ünvan</span>
+                                <h5>{{ $project->location }}</h5>
+                            </div>
+                        @endisset
+                        @isset($project->publish_date)
+                            <div class="pd-info-item">
+                                <span>Yayınlanma Tarixi</span>
+                                <h5>{{ \Carbon\Carbon::parse($project->publish_date)->locale('az')->translatedFormat('d M Y') }}</h5>
+                            </div>
+                        @endisset
                     </div>
                 </div>
             </div>
-            <div class="row pb-15">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="image mb-30 wow fadeInUp delay-0-2s">
-                        <img src="assets/images/projects/project-middle1.jpg" alt="Project Middle">
-                    </div>
+            @isset($project->images)
+                <div class="row pb-15">
+                    @foreach($project->images as $image)
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="image mb-30 wow fadeInUp delay-0-2s">
+                                <img src="{{ asset($image->path) }}" alt="{{ $project->title }}">
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="image mb-30 wow fadeInUp delay-0-4s">
-                        <img src="assets/images/projects/project-middle2.jpg" alt="Project Middle">
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="image mb-30 wow fadeInUp delay-0-6s">
-                        <img src="assets/images/projects/project-middle3.jpg" alt="Project Middle">
-                    </div>
-                </div>
-            </div>
+            @endisset
             <div class="tag-share py-30 wow fadeInUp delay-0-2s">
                 <div class="item">
-                    <b>Tags</b>
+                    <b>Teqlər</b>
                     <div class="tag-coulds">
-                        <a href="blog.html">Design</a>
-                        <a href="blog.html">Figma</a>
-                        <a href="blog.html">Apps</a>
+                        <a href="javascript:void(0)">Design</a>
+                        <a href="javascript:void(0)">Figma</a>
+                        <a href="javascript:void(0)">Apps</a>
                     </div>
                 </div>
                 <div class="item">
                     <b>Share</b>
                     <div class="social-style-one">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{request()->url()}}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite"><i class="fab fa-linkedin-in"></i></a>
+{{--                        <a href="{{ $about->instagram }}"><i class="fab fa-instagram"></i></a>--}}
+{{--                        <a href="{{ $about->github }}"><i class="fab fa-github"></i></a>--}}
                     </div>
                 </div>
             </div>
@@ -113,59 +114,42 @@
 
 
     <!-- Related Projects Area start -->
-    <section class="related-projects-area pb-70 rpb-40 rel z-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-12">
-                    <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                        <h2>Related Projects</h2>
+    @if(isset($related_projects) && count($related_projects))
+        <section class="related-projects-area pb-70 rpb-40 rel z-1">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                            <h2>Oxşar Layihələr</h2>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
+                    @foreach($related_projects as $r_project)
+                        <div class="col-xl-4 col-md-6">
+                            <div class="project-item style-two wow fadeInUp delay-0-2s">
+                                <div class="project-image before-after-none">
+                                    <img src="{{ asset($r_project->main_image) }}" alt="{{ $r_project->title }}">
+                                </div>
+                                <div class="project-content">
+                                    <span class="sub-title">{{ $r_project->category->name }}</span>
+                                    <h4><a href="{{ route('front.project-details', $r_project->slug) }}">{{ $r_project->title }}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-4 col-md-6">
-                    <div class="project-item style-two wow fadeInUp delay-0-2s">
-                        <div class="project-image before-after-none">
-                            <img src="assets/images/projects/related-project1.jpg" alt="Project">
-                        </div>
-                        <div class="project-content">
-                            <span class="sub-title">Graphics Design</span>
-                            <h4><a href="project-details.html">Brand Identity Design</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="project-item style-two wow fadeInUp delay-0-4s">
-                        <div class="project-image before-after-none">
-                            <img src="assets/images/projects/related-project2.jpg" alt="Project">
-                        </div>
-                        <div class="project-content">
-                            <span class="sub-title">Product Design</span>
-                            <h4><a href="project-details.html">Mobile Apps Design</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="project-item style-two wow fadeInUp delay-0-6s">
-                        <div class="project-image before-after-none">
-                            <img src="assets/images/projects/related-project3.jpg" alt="Project">
-                        </div>
-                        <div class="project-content">
-                            <span class="sub-title">Product Design</span>
-                            <h4><a href="project-details.html">Dashboard Development</a></h4>
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-lines">
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
             </div>
-        </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
-    </section>
+        </section>
+    @endif
+
     <!-- Related Projects Area end -->
 
 @endsection
