@@ -84,15 +84,17 @@
             @endisset
             <div class="tag-share py-30 wow fadeInUp delay-0-2s">
                 <div class="item">
-                    <b>Teqlər</b>
+                    <b>Teqlər:</b>
                     <div class="tag-coulds">
-                        <a href="javascript:void(0)">Design</a>
-                        <a href="javascript:void(0)">Figma</a>
-                        <a href="javascript:void(0)">Apps</a>
+                        @if(count($tags))
+                            @foreach($tags as $tag)
+                                <a type="submit" href="{{ route('front.projects', ['q' => $tag]) }}">{{ $tag }}</a>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="item">
-                    <b>Share</b>
+                    <b>Paylaş</b>
                     <div class="social-style-one">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{request()->url()}}"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.linkedin.com/sharing/share-offsite"><i class="fab fa-linkedin-in"></i></a>

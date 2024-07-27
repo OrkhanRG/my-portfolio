@@ -32,4 +32,9 @@ class Project extends Model
     {
         return $this->hasMany(Image::class, 'project_id', 'id');
     }
+
+    public function tags(): HasMany
+    {
+        return $this->hasMany(ProjectTags::class, 'project_id', 'id');
+    }
 }

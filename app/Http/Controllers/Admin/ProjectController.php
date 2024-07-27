@@ -8,6 +8,7 @@ use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Project;
+use App\Models\ProjectTags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -39,6 +40,7 @@ class ProjectController extends Controller
         $data = $request->only('title', 'category_id', 'client', 'publish_date', 'description', 'short_description', 'location', 'url');
         $data['status'] = $request->has('status');
 
+
         if ($request->slug) {
             $slug = Str::slug($request->slug);
         } else {
@@ -63,6 +65,21 @@ class ProjectController extends Controller
         if (!$project) {
             alert()->error('Diqqət', 'Layihə yaradılan zaman xəta baş verdi!');
             return back()->withInput();
+        }
+
+        if ($request->tags)
+        {
+            $tags = str_replace(['{', '}', '[', ']', '"', ':', 'value'], '', $request->tags);
+            $tags = explode(',', $tags);
+            $tag_list = [];
+            foreach ($tags as $tag) {
+                $tag_list[] = [
+                    'name' => $tag,
+                    'project_id' => $project->id,
+                    'created_at' => now()
+                ];
+            }
+            ProjectTags::query()->insert($tag_list);
         }
 
         if ($request->hasFile('images')) {
@@ -103,8 +120,10 @@ class ProjectController extends Controller
         $project = Project::query()->where('id', $id)->firstOrFail();
         $images = Image::query()->where('project_id', $id)->pluck('path')->toArray();
         $categories = Category::query()->get();
+        $tags = ProjectTags::query()->where('project_id', $id)->pluck('name')->toArray();
+        $tags = implode(', ', $tags);
 
-        return view('admin.project.create_edit', compact('project', 'categories', 'images'));
+        return view('admin.project.create_edit', compact('project', 'categories', 'images', 'tags'));
     }
 
     /**
@@ -157,6 +176,22 @@ class ProjectController extends Controller
 
         $update = $project->update($data);
 
+        ProjectTags::query()->where('project_id', $project_id)->delete();
+        if ($request->tags)
+        {
+            $tags = str_replace(['{', '}', '[', ']', '"', ':', 'value'], '', $request->tags);
+            $tags = explode(',', $tags);
+            $tag_list = [];
+            foreach ($tags as $tag) {
+                $tag_list[] = [
+                    'name' => $tag,
+                    'project_id' => $project->id,
+                    'created_at' => now()
+                ];
+            }
+            ProjectTags::query()->insert($tag_list);
+        }
+
         if (!$update) {
             alert()->error('Diqqət', 'Layihə güncəlləmə zamanı xəta baş verdi!');
             return back()->withInput();
@@ -207,6 +242,7 @@ class ProjectController extends Controller
             ], 404);
         }
 
+        ProjectTags::query()->where('project_id', $project->id)->delete();
 
         if ($project->main_image && file_exists($project->main_image)) {
             unlink($project->main_image);

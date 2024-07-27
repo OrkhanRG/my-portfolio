@@ -10,6 +10,9 @@
     <link href="{{ asset('assets/src/plugins/src/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/assets/src/plugins/src/filepond/filepond.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/src/plugins/src/filepond/FilePondPluginImagePreview.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/src/tagify/tagify.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/light/tagify/custom-tagify.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/dark/tagify/custom-tagify.css') }}">
 @endpush
 
 @section('content')
@@ -118,7 +121,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 mt-2">
+                        <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label for="client">Ünvan</label>
                                 <input type="text" class="form-control mb-2"
@@ -130,7 +133,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 mt-2">
+                        <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label for="client">URL</label>
                                 <input type="url" class="form-control mb-2"
@@ -140,6 +143,15 @@
                             @error('url')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div>
+
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group">
+                                <label for="client">#Teq</label>
+                                <input type="text" class="form-control mb-2"
+                                       name='tags' id="tags" placeholder="#Teq"
+                                       value="{{ $tags ?? '' }}">
+                            </div>
                         </div>
 
                         <div class="col-md-6 mt-2">
@@ -210,6 +222,8 @@
     <script src="{{ asset('assets/src/plugins/src/filepond/FilePondPluginImageResize.min.js') }}"></script>
     <script src="{{ asset('assets/src/plugins/src/filepond/FilePondPluginImageTransform.min.js') }}"></script>
     <script src="{{ asset('assets/src/plugins/src/filepond/filepondPluginFileValidateSize.min.js') }}"></script>
+    <script src="{{ asset('assets/src/plugins/src/tagify/tagify.min.js') }}"></script>
+    <script src="{{ asset('assets/src/plugins/src/tagify/custom-tagify.js') }}"></script>
     <script>
         var f1 = flatpickr(document.getElementById('publish_date'), {
             enableTime: true,
@@ -257,6 +271,9 @@
                 pondImages.addFile("{{ asset($image) }}");
             @endforeach
         @endif
+
+        var tags = document.querySelector('#tags');
+        new Tagify(tags);
     </script>
 
 @endpush
