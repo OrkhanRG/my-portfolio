@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'X Layihəsi')
+@section('title', $project->title)
 
 @push('css')
 @endpush

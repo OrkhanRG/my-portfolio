@@ -47,7 +47,7 @@ class ProjectController extends Controller
 
     public function projectDetails($slug)
     {
-        $project = Project::query()->with('images')->where('slug', $slug)->first();
+        $project = Project::query()->with('images')->where('slug', $slug)->firstOrFail();
         $tags = ProjectTags::query()->where('project_id', $project->id)->pluck('name')->toArray();
         $related_projects = Project::query()
             ->with('category')
