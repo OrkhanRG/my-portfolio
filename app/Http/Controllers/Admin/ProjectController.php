@@ -207,6 +207,29 @@ class ProjectController extends Controller
             ], 404);
         }
 
+
+        if ($project->main_image && file_exists($project->main_image)) {
+            unlink($project->main_image);
+        }
+
+        $images_query = Image::query()->where('project_id', $id);
+        $images = $images_query->get();
+        $image_list = [];
+        if (count($images)) {
+            foreach ($images as $image) {
+                $image_list[] = [
+                    'path' => $image->path
+                ];
+            }
+
+            foreach ($image_list as $old_image) {
+                if (file_exists($old_image['path'])){
+                    unlink($old_image['path']);
+                }
+            }
+            $images_query->delete();
+        }
+
         $delete = $project->delete();
 
         return response()->json([
