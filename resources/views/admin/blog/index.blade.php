@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Layihələr')
+@section('title', 'Bloqlar')
 
 @push('css')
 @endpush
@@ -9,7 +9,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>Layihələr</h4>
+                    <h4>Bloqlar</h4>
                 </div>
             </div>
         </div>
@@ -21,37 +21,29 @@
                     <tr>
                         <th scope="col"><b>Başlıq</b></th>
                         <th scope="col"><b>Kateqoriya</b></th>
-                        <th scope="col"><b>Müştəri</b></th>
-                        <th scope="col"><b>Ünvan</b></th>
-                        <th scope="col"><b>URL</b></th>
                         <th scope="col"><b>Yayınlanma Tarixi</b></th>
+                        <th scope="col"><b>Bitmə Tarixi</b></th>
+                        <th scope="col"><b>Yaradıcı</b></th>
                         <th class="text-center" scope="col"><b>Status</b></th>
                         <th class="text-center" scope="col"><b>Action</b></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($projects as $project)
-                        <tr id="row-{{ $project->id }}">
-                            <td>{{ $project->title }}</td>
-                            <td>{{ $project->category->name ?? '' }}</td>
-                            <td>{{ $project->client }}</td>
-                            <td>{{ $project->location }}</td>
+                    @foreach($blogs as $blog)
+                        <tr id="row-{{ $blog->id }}">
+                            <td>{{ $blog->title }}</td>
+                            <td>{{ $blog->category->name }}</td>
+                            <td>{{ $blog->publish_date }}</td>
+                            <td>{{ $blog->expire_date }}</td>
+                            <td><i data-bs-toggle="tooltip" data-bs-placement="top" data-feather="user" title="{{ $blog->creator->name." ".$blog->creator->surname }}"></i></td>
                             <td class="text-center">
-                                @if($project->url)
-                                    <a href="{{ $project->url }}"></a>
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td>{{ $project->publish_date }}</td>
-                            <td class="text-center">
-                                <span class="badge badge-light-{{ $project->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $project->id }}">
-                                   {{ $project->status ? 'Aktiv' : 'Passiv' }}
+                                <span class="badge badge-light-{{ $blog->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $blog->id }}">
+                                   {{ $blog->status ? 'Aktiv' : 'Passiv' }}
                                 </span>
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="{{ route('admin.project.edit', $project->id) }}" class="action-btn btn-edit bs-tooltip me-2"
+                                    <a href="{{ route('admin.blog.edit', $blog->id) }}" class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" aria-label="Edit"
                                        data-bs-original-title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -60,7 +52,7 @@
                                             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                         </svg>
                                     </a>
-                                    <a href="javascript:void(0);" data-id="{{ $project->id }}" data-title="{{ $project->title }}" class="action-btn btn-delete bs-tooltip"
+                                    <a href="javascript:void(0);" data-id="{{ $blog->id }}" data-title="{{ $blog->title }}" class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" aria-label="Delete"
                                        data-bs-original-title="Delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -80,7 +72,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $projects->links() }}
+                    {{ $blogs->links() }}
                 </div>
             </div>
         </div>
@@ -95,7 +87,7 @@
                 let id = self.data('id');
 
                 $.ajax({
-                    url: "{{ route('admin.project.change-status') }}",
+                    url: "{{ route('admin.blog.change-status') }}",
                     type: 'POST',
                     data: {
                         id: id
@@ -126,12 +118,12 @@
                 let self = $(this);
                 let id = self.data('id');
                 let title = self.data('title');
-                let route = "{{ route('admin.project.destroy', 'test') }}"
+                let route = "{{ route('admin.blog.destroy', 'test') }}"
                 route = route.replace('test', id);
 
                 Swal.fire({
                     title: title,
-                    text:  "Layihəni silmək istədiyinizə əminsiz?",
+                    text:  "Bloqu silmək istədiyinizə əminsiz?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -160,7 +152,7 @@
 
                         Swal.fire(
                             'Uğurlu!',
-                            `Layihə uğurla silindi!`,
+                            `Bloq uğurla silindi!`,
                             'success',
                         )
                     }
@@ -168,5 +160,14 @@
 
             })
         })
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
     </script>
 @endpush

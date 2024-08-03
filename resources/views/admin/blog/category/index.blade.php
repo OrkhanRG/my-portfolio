@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Layihələr')
+@section('title', 'Bloq Kateqoriyalar')
 
 @push('css')
 @endpush
@@ -9,7 +9,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>Layihələr</h4>
+                    <h4>Bloq Kateqoriyaları</h4>
                 </div>
             </div>
         </div>
@@ -19,39 +19,29 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col"><b>Başlıq</b></th>
-                        <th scope="col"><b>Kateqoriya</b></th>
-                        <th scope="col"><b>Müştəri</b></th>
-                        <th scope="col"><b>Ünvan</b></th>
-                        <th scope="col"><b>URL</b></th>
-                        <th scope="col"><b>Yayınlanma Tarixi</b></th>
+                        <th scope="col"><b>Kateqoriya Adı</b></th>
+                        <th scope="col"><b>Slug</b></th>
+                        <th scope="col"><b>Açığlama</b></th>
                         <th class="text-center" scope="col"><b>Status</b></th>
                         <th class="text-center" scope="col"><b>Action</b></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($projects as $project)
-                        <tr id="row-{{ $project->id }}">
-                            <td>{{ $project->title }}</td>
-                            <td>{{ $project->category->name ?? '' }}</td>
-                            <td>{{ $project->client }}</td>
-                            <td>{{ $project->location }}</td>
-                            <td class="text-center">
-                                @if($project->url)
-                                    <a href="{{ $project->url }}"></a>
-                                @else
-                                    -
-                                @endif
+                    @foreach($blog_categories as $category)
+                        <tr id="row-{{ $category->id }}">
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->slug }}</td>
+                            <td >
+                                <i data-bs-toggle="tooltip" data-bs-placement="top" data-feather="message-square" title="{{ strip_tags($category->description) }}"></i>
                             </td>
-                            <td>{{ $project->publish_date }}</td>
                             <td class="text-center">
-                                <span class="badge badge-light-{{ $project->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $project->id }}">
-                                   {{ $project->status ? 'Aktiv' : 'Passiv' }}
+                                <span class="badge badge-light-{{ $category->status ? 'success' : 'danger' }} btn-change-status" data-id="{{ $category->id }}">
+                                   {{ $category->status ? 'Aktiv' : 'Passiv' }}
                                 </span>
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="{{ route('admin.project.edit', $project->id) }}" class="action-btn btn-edit bs-tooltip me-2"
+                                    <a href="{{ route('admin.blog-category.edit', $category->id) }}" class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" aria-label="Edit"
                                        data-bs-original-title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -60,7 +50,7 @@
                                             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                         </svg>
                                     </a>
-                                    <a href="javascript:void(0);" data-id="{{ $project->id }}" data-title="{{ $project->title }}" class="action-btn btn-delete bs-tooltip"
+                                    <a href="javascript:void(0);" data-id="{{ $category->id }}" data-name="{{ $category->name }}" class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" aria-label="Delete"
                                        data-bs-original-title="Delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -80,7 +70,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    {{ $projects->links() }}
+                    {{ $blog_categories->links() }}
                 </div>
             </div>
         </div>
@@ -95,7 +85,7 @@
                 let id = self.data('id');
 
                 $.ajax({
-                    url: "{{ route('admin.project.change-status') }}",
+                    url: "{{ route('admin.blog-category.change-status') }}",
                     type: 'POST',
                     data: {
                         id: id
@@ -125,13 +115,13 @@
             $('.btn-delete').on('click', function () {
                 let self = $(this);
                 let id = self.data('id');
-                let title = self.data('title');
-                let route = "{{ route('admin.project.destroy', 'test') }}"
+                let name = self.data('name');
+                let route = "{{ route('admin.blog-category.destroy', 'test') }}"
                 route = route.replace('test', id);
 
                 Swal.fire({
-                    title: title,
-                    text:  "Layihəni silmək istədiyinizə əminsiz?",
+                    title: name,
+                    text:  "Kateqoriyasını silmək istədiyinizə əminsiz?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -160,13 +150,23 @@
 
                         Swal.fire(
                             'Uğurlu!',
-                            `Layihə uğurla silindi!`,
+                            `Kateqoriya uğurla silindi!`,
                             'success',
                         )
                     }
                 })
 
             })
-        })
+        });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+
 @endpush

@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\BlogCategoryController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
 //front
@@ -61,6 +63,15 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     //project
     Route::resource('/project', AdminProjectController::class);
     Route::post('/project/change-status', [AdminProjectController::class, 'changeStatus'])->name('project.change-status');
+
+    //blog_blog-category
+    Route::resource('/blog-category', BlogCategoryController::class);
+    Route::post('/blog-category/change-status', [BlogCategoryController::class, 'changeStatus'])->name('blog-category.change-status');
+
+    //blog
+    Route::resource('/blog', AdminBlogController::class);
+    Route::post('/blog/change-status', [AdminBlogController::class, 'changeStatus'])->name('blog.change-status');
+
 
     //about
     Route::prefix('about')->name('about.')->group(function () {
