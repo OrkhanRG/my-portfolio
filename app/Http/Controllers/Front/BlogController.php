@@ -31,8 +31,13 @@ class BlogController extends Controller
         $tags = array_map('strtoupper', $tags);
         $tags = array_unique($tags);
 
-        $categories = BlogCategory::query()->where('status', 1)->get();
-
+        $categories = BlogCategory::query()
+            ->join('blogs', 'blog_categories.id', '=', 'blogs.category_id')
+            ->where('blog_categories.status', 1)
+            ->where('blogs.status', 1)
+            ->groupBy('blog_categories.id', 'blog_categories.name')
+            ->select('blog_categories.id', 'blog_categories.name')
+            ->get();
 
         return view('front.blog.blogs', compact('blogs', 'categories', 'tags', 'latest_blog'));
     }
@@ -51,7 +56,9 @@ class BlogController extends Controller
         $tags = array_map('strtoupper', $tags);
         $tags = array_unique($tags);
 
-        $categories = BlogCategory::query()->where('status', 1)->get();
+        $categories = BlogCategory::query()
+            ->where('status', 1)
+            ->get();
 
         return view('front.blog.blog-details', compact('latest_blog', 'tags', 'categories'));
     }
