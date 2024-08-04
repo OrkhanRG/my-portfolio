@@ -41,6 +41,10 @@ class BlogController extends Controller
         $data['status'] = $request->has('status');
         $data['creator_id'] = auth()->user()->id;
 
+        if (!$data['publish_date'])
+        {
+            $data['publish_date'] = date('Y-m-d');
+        }
 
         if ($request->slug) {
             $slug = Str::slug($request->slug);
@@ -134,6 +138,11 @@ class BlogController extends Controller
     {
         $data = $request->only('title', 'category_id', 'publish_date', 'expire_date', 'description', 'short_description');
         $data['status'] = $request->has('status');
+
+        if (!$data['publish_date'])
+        {
+            $data['publish_date'] = date('Y-m-d');
+        }
 
         $blog = Blog::query()->findOrFail($id);
         $blog_id = $blog->id;

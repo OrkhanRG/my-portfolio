@@ -498,42 +498,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="blog-item wow fadeInUp delay-0-2s">
-                            <div class="image">
-                                <img src="{{ asset('assets/images/blog/blog1.png') }}" alt="Blog">
-                            </div>
-                            <div class="content">
-                                <div class="blog-meta mb-35">
-                                    <a class="tag" href="blog.html">Design</a>
-                                    <a class="tag" href="blog.html">Figma</a>
-                                </div>
-                                <h5><a href="blog-details.html">Tips For Conductin See Usability Studies</a></h5>
-                                <hr>
-                                <div class="blog-meta mt-35">
-                                    <a class="date" href="#"><i class="far fa-calendar-alt"></i> September 25, 2023</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="blog-item wow fadeInUp delay-0-2s">
-                            <div class="image">
-                                <img src="{{ asset('assets/images/blog/blog2.png') }}" alt="Blog">
-                            </div>
-                            <div class="content">
-                                <div class="blog-meta mb-35">
-                                    <a class="tag" href="blog.html">Design</a>
-                                    <a class="tag" href="blog.html">Figma</a>
-                                </div>
-                                <h5><a href="blog-details.html">Keyboard-Only Suppor Assistive Technology</a></h5>
-                                <hr>
-                                <div class="blog-meta mt-35">
-                                    <a class="date" href="#"><i class="far fa-calendar-alt"></i> September 25, 2023</a>
+
+                    @isset($blogs)
+                        @foreach($blogs as $blog)
+                            <div class="col-lg-6">
+                                <div class="blog-item wow fadeInUp delay-0-2s">
+                                    <div class="image">
+                                        <img src="{{ asset($blog->main_image) }}" alt="{{ $blog->title }}">
+                                    </div>
+                                    <div class="content">
+                                        <div class="blog-meta mb-35">
+                                            <a class="tag" href="{{ route('front.blogs.category', $blog->category->name) }}">{{ $blog->category->name }}</a>
+                                        </div>
+                                        <h5><a href="{{ route('front.blog-details', $blog->slug) }}">{{ $blog->title }}</a></h5>
+                                        <hr>
+                                        <div class="blog-meta mt-35">
+                                            <a class="date" href="{{ route('front.blog-details', $blog->slug) }}"><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($blog->publish_date)->locale('az')->translatedFormat('j F Y') }}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endisset
+
                 </div>
             </div>
         </div>

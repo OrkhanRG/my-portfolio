@@ -85,6 +85,7 @@
                                                                         <option value="{{ null }}" selected>Elmi dərəcə</option>
                                                                         <option {{ isset($education) ? ($education->degree == 'Ali' ? 'selected' : '') : '' }} value="Ali">Ali</option>
                                                                         <option {{ isset($education) ? ($education->degree == 'Natamam Ali' ? 'selected' : '') : '' }} value="Natamam Ali">Natamam Ali</option>
+                                                                        <option {{ isset($education) ? ($education->degree == 'Magistr' ? 'selected' : '') : '' }} value="Magistr">Magistr</option>
                                                                         <option {{ isset($education) ? ($education->degree == 'Orta Texniki' ? 'selected' : '') : '' }} value="Orta Texniki">Orta Texniki</option>
                                                                         <option {{ isset($education) ? ($education->degree == 'Orta Xüsusi' ? 'selected' : '') : '' }} value="Orta Xüsusi">Orta Xüsusi</option>
                                                                         <option {{ isset($education) ? ($education->degree == 'Orta' ? 'selected' : '') : '' }} value="Orta">Orta</option>

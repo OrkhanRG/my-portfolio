@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Blog;
 use App\Models\Company;
 use App\Models\Education;
 use App\Models\Experience;
@@ -33,6 +34,15 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
+        $blogs = Blog::query()
+            ->with('category')
+            ->where('status', 1)
+            ->where('publish_date', '<=', date('Y-m-d'))
+            ->where('expire_date', '>=', date('Y-m-d'))
+            ->limit(2)
+            ->orderBy('publish_date', 'desc')
+            ->get();
+
         $totalMonth = 0;
         foreach ($experiences as $experience)
         {
@@ -57,6 +67,7 @@ class HomeController extends Controller
             'skills' => $skills,
             'companies' => $companies,
             'projects' => $projects,
+            'blogs' => $blogs,
         ]);
     }
 }

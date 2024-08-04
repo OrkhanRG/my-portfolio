@@ -37,7 +37,8 @@ Route::name('front.')->middleware('about')->group(function () {
 
     //blogs
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
-    Route::get('/blog-details/', [BlogController::class, 'blogDetails'])->name('blog-details');
+    Route::get('/blogs/category/{category}', [BlogController::class, 'index'])->name('blogs.category');
+    Route::get('/blog/detail/{slug}', [BlogController::class, 'blogDetails'])->name('blog-details');
 
     //contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
