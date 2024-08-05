@@ -40,7 +40,13 @@ class ProjectController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(6);
 
-        $categories = Category::query()->where('status', 1)->get();
+        $categories = Category::query()
+            ->join('projects', 'projects.category_id', 'categories.id')
+            ->where('projects.status', 1)
+            ->where('categories.status', 1)
+            ->groupBy('categories.id', 'categories.name', 'categories.slug')
+            ->select('categories.id', 'categories.name', 'categories.slug')
+            ->get();
 
         return view('front.projects', compact('projects', 'categories'));
     }
