@@ -42,8 +42,34 @@ class BlogController extends Controller
         return view('front.blog.blogs', compact('blogs', 'categories', 'tags', 'latest_blog'));
     }
 
-    public function blogDetails()
+    public function blogDetails($slug)
     {
+        $blog = Blog::query()->where('slug', $slug)->firstOrFail();
+
+        $next_blog = Blog::query()
+            ->where('status', 1)
+            ->where(function ($query) use ($blog) {
+                $query
+                    ->where('publish_date', '<=', date('Y-m-d'))
+                    ->where('publish_date', '>=', $blog->publish_date);
+            })
+            ->where('expire_date', '>=', date('Y-m-d'))
+            ->whereNot('id', $blog->id)
+            ->first();
+
+        $previous_blog = Blog::query()
+            ->where('status', 1)
+            ->where(function ($query) use ($blog) {
+                $query
+                    ->where('publish_date', '<=', date('Y-m-d'))
+                    ->where('publish_date', '<=', $blog->publish_date);
+            })
+            ->where('expire_date', '>=', date('Y-m-d'))
+            ->whereNot('id', $blog->id)
+            ->first();
+
+
+
         $latest_blog = Blog::query()
             ->where('status', 1)
             ->where('publish_date', '<=', date('Y-m-d'))
@@ -60,6 +86,6 @@ class BlogController extends Controller
             ->where('status', 1)
             ->get();
 
-        return view('front.blog.blog-details', compact('latest_blog', 'tags', 'categories'));
+        return view('front.blog.blog-details', compact('blog','latest_blog', 'tags', 'categories', 'next_blog', 'previous_blog'));
     }
 }

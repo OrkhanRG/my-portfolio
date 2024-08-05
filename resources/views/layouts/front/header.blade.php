@@ -5,7 +5,7 @@
 
             <div class="header-inner rel d-flex align-items-center">
                 <div class="logo-outer">
-                    <div class="logo"><a href="{{ route('front.index') }}"><img src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo" title="Logo"></a></div>
+                    <div class="logo"><a href="{{ route('front.index') }}"><img width="120" src="{{ asset('assets/images/logos/logo.png') }}" alt="Logo" title="Logo"></a></div>
                 </div>
 
                 <div class="nav-outer clearfix mx-auto">

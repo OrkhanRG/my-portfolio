@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Blog extends Model
@@ -30,5 +32,15 @@ class Blog extends Model
     public function creator(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'creator_id');
+    }
+
+    public function tags(): HasMany
+    {
+        return $this->hasMany(BlogTag::class, 'blog_id', 'id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->HasMany(BlogImage::class, 'blog_id', 'id');
     }
 }

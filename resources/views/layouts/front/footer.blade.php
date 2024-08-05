@@ -18,13 +18,15 @@
                             <li><a href="{{ route('front.contact') }}">Əlaqə</a></li>
                         </ul>
                     </div>
-                    <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
-                        <form action="#">
-                            <label for="email-address"><i class="far fa-envelope"></i></label>
-                            <input id="email-address" type="email" placeholder="Email Ünvan" required>
-                            <button>Abunə Ol <i class="far fa-angle-right"></i></button>
-                        </form>
-                    </div>
+                    @if(false)
+                        <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
+                            <form action="#">
+                                <label for="email-address"><i class="far fa-envelope"></i></label>
+                                <input id="email-address" type="email" placeholder="Email Ünvan" required>
+                                <button>Abunə Ol <i class="far fa-angle-right"></i></button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-widget widget_contact_info wow fadeInUp delay-0-6s">
