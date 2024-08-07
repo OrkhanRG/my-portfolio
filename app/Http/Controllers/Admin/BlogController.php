@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\BlogPostInfoSendEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogStoreRequest;
 use App\Http\Requests\BlogUpdateRequest;
+use App\Listeners\BlogPostInfoSendListener;
 use App\Models\BlogCategory;
 use App\Models\BlogImage;
 use App\Models\Blog;
 use App\Models\BlogTag;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -104,6 +107,10 @@ class BlogController extends Controller
                 BlogImage::query()->insert($image_list);
             }
         }
+
+        $subscribers = Subscription::query()->whereNotNull('email_verified_at')->pluck('email')->toArray();
+
+        event(new BlogPostInfoSendEvent( $blog, $subscribers));
 
         alert()->success('Təbriklər!', 'Bloq yaradıldı!');
         return redirect()->route('admin.blog.index');

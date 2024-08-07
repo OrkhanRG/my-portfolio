@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\BlogPostInfoSendEvent;
 use App\Events\SubscriptionVerifyEvent;
+use App\Listeners\BlogPostInfoSendListener;
 use App\Listeners\SubscriptionVerifyListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         SubscriptionVerifyEvent::class => [
             SubscriptionVerifyListener::class,
+        ],
+        BlogPostInfoSendEvent::class => [
+            BlogPostInfoSendListener::class,
         ],
     ];
 
