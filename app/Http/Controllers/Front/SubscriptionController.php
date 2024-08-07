@@ -70,6 +70,15 @@ class SubscriptionController extends Controller
             return redirect()->back();
         }
 
+        $verify_send_date = Carbon::parse($subscriber_verify->created_at);
+        $verify_expire_date = $verify_send_date->addHour()->format('Y-m-d H:i:s');
+
+        if ($verify_expire_date <= date('Y-m-d H:i:s')) {
+            $subscriber_verify->delete();
+            alert()->error('Diqqət!', 'Doğrulama mailin müddəti bitmişdir! Zəhmət olmasa yenidən abunə olunmağa çalışın');
+            return redirect()->back();
+        }
+
         $subscriber = Subscription::query()->where('email', $subscriber_verify->email)->first();
         $subscriber_verify->delete();
 
