@@ -18,23 +18,22 @@
                             <li><a href="{{ route('front.contact') }}">Əlaqə</a></li>
                         </ul>
                     </div>
-                    @if(false)
-                        <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
-                            <form action="#">
-                                <label for="email-address"><i class="far fa-envelope"></i></label>
-                                <input id="email-address" type="email" placeholder="Email Ünvan" required>
-                                <button>Abunə Ol <i class="far fa-angle-right"></i></button>
-                            </form>
-                        </div>
-                    @endif
+                    <div class="footer-widget widget_newsletter wow fadeInUp delay-0-4s">
+                        <form action="{{ route('front.subscription') }}" method="POST">
+                            @csrf
+                            <label for="email"><i class="far fa-envelope"></i></label>
+                            <input id="email" type="email" name="email" placeholder="Email Ünvan" required>
+                            <button>Abunə Ol <i class="far fa-angle-right"></i></button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-5">
                     <div class="footer-widget widget_contact_info wow fadeInUp delay-0-6s">
                         <h6 class="footer-title">Ünvan</h6>
                         <ul>
-                            <li><i class="far fa-map-marker-alt"></i> Mustafa Topçubaşov 21A, Azərbaycan Bakı</li>
-                            <li><i class="far fa-envelope"></i> <a href="mailto:orxanismayilov851@gmail.com">orxanismayilov851@gmail.com</a></li>
-                            <li><i class="far fa-phone"></i> <a href="callto:+994(55)8783700">+994 (55) 878 37 00</a></li>
+                            <li><i class="far fa-map-marker-alt"></i> {{ $about->address }}</li>
+                            <li><i class="far fa-envelope"></i> <a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
+                            <li><i class="far fa-phone"></i> <a href="callto:{{ $about->phone }}">{{ $about->phone }}</a></li>
                         </ul>
                     </div>
                 </div>

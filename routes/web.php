@@ -21,6 +21,7 @@ use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Front\SubscriptionController;
 
 /*
  *
@@ -42,6 +43,10 @@ Route::name('front.')->middleware('about')->group(function () {
 
     //contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+    //subscription
+    Route::post('/subscription', [SubscriptionController::class, 'subscription'])->name('subscription');
+    Route::get('/subscription-verify/{token}', [SubscriptionController::class, 'verify'])->name('subscription-verify');
 });
 
 Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function () {
