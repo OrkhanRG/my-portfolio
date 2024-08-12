@@ -11,11 +11,51 @@ class BlogController extends Controller
 {
     public function index()
     {
+        $keywords = request()->q;
+        $category = request()->category;
+        $tag = request()->tag;
+
         $blogs = Blog::query()
             ->with('category')
             ->where('status', 1)
             ->where('publish_date', '<=', date('Y-m-d'))
             ->where('expire_date', '>=', date('Y-m-d'))
+            ->where(function ($query) use ($category, $keywords, $tag) {
+                if ($category) {
+                    $query->whereHas('category', function ($query) use ($category) {
+                        $query->where("name", $category);
+                    });
+                }
+
+                if ($tag) {
+                    $query->whereHas('tags', function ($query) use ($tag) {
+                        $query->where("name", "LIKE", "%$tag%");
+                    })
+                        ->orWhereHas('category', function ($query) use ($tag) {
+                            $query->where("name", "LIKE", "%$tag%");
+                        })
+                        ->orWhere(function ($query) use ($tag) {
+                            $query->where("title", "LIKE", "%$tag%")
+                                ->orWhere("short_description", "LIKE", "%$tag%")
+                                ->orWhere("description", "LIKE", "%$tag%");
+                        });
+                }
+
+                if ($keywords) {
+                    $query->whereHas('category', function ($query) use ($keywords) {
+                        $query->where("name", "LIKE", "%$keywords%")
+                            ->orWhere("description", "LIKE", "%$keywords%");
+                    })
+                        ->orWhereHas('tags', function ($query) use ($keywords) {
+                            $query->where("name", "LIKE", "%$keywords%");
+                        })
+                        ->orWhere(function ($query) use ($keywords) {
+                            $query->where("title", "LIKE", "%$keywords%")
+                                ->orWhere("short_description", "LIKE", "%$keywords%")
+                                ->orWhere("description", "LIKE", "%$keywords%");
+                        });
+                }
+            })
             ->orderBy('publish_date', 'desc')
             ->paginate(8);
 
@@ -69,7 +109,6 @@ class BlogController extends Controller
             ->first();
 
 
-
         $latest_blog = Blog::query()
             ->where('status', 1)
             ->where('publish_date', '<=', date('Y-m-d'))
@@ -86,6 +125,6 @@ class BlogController extends Controller
             ->where('status', 1)
             ->get();
 
-        return view('front.blog.blog-details', compact('blog','latest_blog', 'tags', 'categories', 'next_blog', 'previous_blog'));
+        return view('front.blog.blog-details', compact('blog', 'latest_blog', 'tags', 'categories', 'next_blog', 'previous_blog'));
     }
 }
