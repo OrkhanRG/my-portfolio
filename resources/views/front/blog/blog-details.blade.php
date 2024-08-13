@@ -148,48 +148,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="content mt-65">
-                            <h3 class="comment-title">Şərhlər</h3>
-                            <div class="comment-body wow fadeInUp delay-0-2s">
-                                <div class="author-thumb">
-                                    <img src="{{ asset('assets/images/blog/comment-author1.jpg') }}" alt="Author">
-                                </div>
-                                <div class="content">
-                                    <ul class="blog-meta">
-                                        <li>
-                                            <h6>Hülya İsmayılova</h6>
-                                        </li>
-                                        <li>
-                                            <a href="#">May 25, 2023</a>
-                                        </li>
-                                    </ul>
-                                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse molestiae
-                                        consequatur qui dolorem eum fugiat voluptas</p>
-                                    <a class="read-more" href="#">Cavab verin <i class="far fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="comment-body comment-child wow fadeInUp delay-0-2s">
-                                <div class="author-thumb">
-                                    <img src="{{ asset('assets/images/blog/comment-author2.jpg') }}" alt="Author">
-                                </div>
-                                <div class="content">
-                                    <ul class="blog-meta">
-                                        <li>
-                                            <h6>Simral İsmayılov</h6>
-                                        </li>
-                                        <li>
-                                            <a href="#">May 25, 2023</a>
-                                        </li>
-                                    </ul>
-                                    <p>At vero eoset accusamus dignissimos ducimus blanditiis sapiente praesentium
-                                        voluptatum deleniti atque</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <form id="comment-form"
-                                  class="comment-form form-style-one pt-65 pb-55 mt-55 wow fadeInUp delay-0-2s"
-                                  name="comment-form" action="#" method="post">
+                        <div data-role="form-comment-answer" class="content d-none">
+                            <form id="comment-form" data-role="form-comment"
+                                  class="comment-form form-style-one pt-25 pb-55 mt-55 wow fadeInUp delay-0-2s"
+                                  name="comment-form" action="#" method="post" style="border-top: 0">
                                 <h5>Şərh bildir</h5>
                                 <div class="row mt-30">
                                     <div class="col-md-6">
@@ -216,12 +178,55 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-0">
+                                            <input type="hidden" name="blog_id" id="blog_id" value="{{ $blog->id }}">
+                                            <input type="hidden" name="parent_id" id="parent_id" value="">
                                             <button type="submit" class="theme-btn">Şərh bildir <i
                                                     class="far fa-angle-right"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                        <div class="content mt-65">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="comment-title">Şərhlər</h3>
+                                <a href="javascript:void(0)" class="btn btn-warning" data-role="btn-comment-answer" data-comment-id="">Şərh bildir</a>
+                            </div>
+                            <div class="comment-body wow fadeInUp delay-0-2s">
+                                <div class="author-thumb">
+                                    <img src="{{ asset('assets/images/blog/comment-author1.jpg') }}" alt="Author">
+                                </div>
+                                <div class="content">
+                                    <ul class="blog-meta">
+                                        <li>
+                                            <h6>Hülya İsmayılova</h6>
+                                        </li>
+                                        <li>
+                                            <a href="#">May 25, 2023</a>
+                                        </li>
+                                    </ul>
+                                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse molestiae
+                                        consequatur qui dolorem eum fugiat voluptas</p>
+                                    <a class="read-more" data-role="comment-reply" data-comment-id="2" href="javascript:void(0)">Cavab verin <i class="far fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="comment-body comment-child wow fadeInUp delay-0-2s">
+                                <div class="author-thumb">
+                                    <img src="{{ asset('assets/images/blog/comment-author2.jpg') }}" alt="Author">
+                                </div>
+                                <div class="content">
+                                    <ul class="blog-meta">
+                                        <li>
+                                            <h6>Simral İsmayılov</h6>
+                                        </li>
+                                        <li>
+                                            <a href="#">May 25, 2023</a>
+                                        </li>
+                                    </ul>
+                                    <p>At vero eoset accusamus dignissimos ducimus blanditiis sapiente praesentium
+                                        voluptatum deleniti atque</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -241,4 +246,8 @@
 @endsection
 
 @push('js')
+    <script>
+        let commentRoute = "{{ route('front.blog-comment') }}";
+    </script>
+    <script src="{{ asset('assets/js/custom/blog/blog-detail.js') }}"></script>
 @endpush

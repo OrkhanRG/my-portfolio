@@ -22,6 +22,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\SubscriptionController;
+use App\Http\Controllers\Front\CommentController;
 
 /*
  *
@@ -40,6 +41,8 @@ Route::name('front.')->middleware('about')->group(function () {
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
     Route::get('/blogs/category/{category}', [BlogController::class, 'index'])->name('blogs.category');
     Route::get('/blog/detail/{slug}', [BlogController::class, 'blogDetails'])->name('blog-details');
+
+    Route::post('/blog-comment', [CommentController::class, 'comment'])->name('blog-comment');
 
     //contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
