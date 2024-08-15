@@ -111,8 +111,9 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     //comment
     Route::get('/comment', [AdminCommentController::class, 'comments'])->name('comments');
     Route::get('/unverified-comment', [AdminCommentController::class, 'unverifiedComments'])->name('unverified-comments');
-    Route::post('/comment/destroy', [AdminCommentController::class, 'destroy'])->name('comment.destroy');
+    Route::delete('/comment/destroy/{id}', [AdminCommentController::class, 'destroy'])->name('comment.destroy');
     Route::post('/comment/change-status', [AdminCommentController::class, 'changeStatus'])->name('comment.change-status');
+    Route::post('/comment/change-verify', [AdminCommentController::class, 'changeVerify'])->name('comment.change-verify');
 });
 
 

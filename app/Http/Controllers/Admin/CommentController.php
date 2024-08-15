@@ -16,6 +16,7 @@ class CommentController extends Controller
     {
         $comments = Comment::query()
             ->where('is_approved', 1)
+            ->orderBy('deleted_at', 'asc')
             ->orderBy('id', 'desc')
             ->paginate(10);
 
@@ -26,6 +27,8 @@ class CommentController extends Controller
     {
         $comments = Comment::query()
             ->where('is_approved', 0)
+            ->withTrashed()
+            ->orderBy('deleted_at', 'asc')
             ->orderBy('id', 'desc')
             ->paginate(10);
 
@@ -43,14 +46,14 @@ class CommentController extends Controller
         if (!$comment)
         {
             return response()->json([
-                'error' => 'Kateqoriya silinmədi!'
+                'error' => 'Koment silinmədi!'
             ], 404);
         }
 
         $delete = $comment->delete();
 
         return  response()->json([
-            'success' => 'Status dəyişdirildi!',
+            'success' => 'Koment Silindi!',
             'status' => $delete
         ], 200);
     }
@@ -58,7 +61,7 @@ class CommentController extends Controller
     public function changeStatus(Request $request)
     {
         $id = $request->only('id');
-        $comment = Comment::query()->where('id', $id)->first();
+        $comment = Comment::query()->where('id', $id)->withTrashed()->first();
 
         if (!$comment)
         {
@@ -71,6 +74,26 @@ class CommentController extends Controller
 
         return  response()->json([
             'success' => 'Status dəyişdirildi!',
+            'data' => $comment
+        ], 200);
+    }
+
+    public function changeVerify(Request $request)
+    {
+        $id = $request->only('id');
+        $comment = Comment::query()->where('id', $id)->withTrashed()->first();
+
+        if (!$comment)
+        {
+            return response()->json([
+                'error' => 'Koment tapılmadı!'
+            ], 404);
+        }
+
+        $comment->update(['is_approved' => !$comment->is_approved]);
+
+        return  response()->json([
+            'success' => 'Koment təsdiqləndi!',
             'data' => $comment
         ], 200);
     }

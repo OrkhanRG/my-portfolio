@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Komentlər')
+@section('title', 'Təsdiq Olunmamış Komentlər')
 
 @push('css')
 @endpush
@@ -9,7 +9,7 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>Komentlər</h4>
+                    <h4>Təsdiq Olunmamış Komentlər</h4>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                     </thead>
                     <tbody>
                     @foreach($comments as $comment)
-                        <tr id="row-{{ $comment->id }}">
+                        <tr id="row-{{ $comment->id }}" class="{{ $comment->deleted_at ? 'table-secondary' : '' }}">
                             <td>{{ $comment->name }}</td>
                             <td>{{ $comment->email }}</td>
                             <td >
@@ -52,24 +52,28 @@
                                        data-bs-original-title="Təsdiq et">
                                         <i class="text-primary" data-feather="check"></i>
                                     </a>
-                                    <a href="javascript:void(0);" data-id="{{ $comment->id }}" data-name="{{ $comment->name }}" class="action-btn btn-delete bs-tooltip"
-                                       data-toggle="tooltip" data-placement="top" aria-label="Delete"
-                                       data-bs-original-title="Sil">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                             stroke-linejoin="round" class="feather feather-trash-2">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                        </svg>
-                                    </a>
-                                    <a href="javascript:void(0);" data-id="{{ $comment->id }}" data-name="{{ $comment->name }}" class="action-btn btn-restore bs-tooltip"
-                                       data-toggle="tooltip" data-placement="top" aria-label="Delete"
-                                       data-bs-original-title="Geri qaytar">
-                                        <i class="text-warning" data-feather="rotate-ccw"></i>
-                                    </a>
+                                    @if(!$comment->deleted_at)
+                                        <a href="javascript:void(0);" data-id="{{ $comment->id }}" data-name="{{ $comment->name }}" class="action-btn btn-delete bs-tooltip"
+                                           data-toggle="tooltip" data-placement="top" aria-label="Delete"
+                                           data-bs-original-title="Sil">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="feather feather-trash-2">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </a>
+                                    @endif
+                                    @if($comment->deleted_at)
+                                        <a href="javascript:void(0);" data-id="{{ $comment->id }}" data-name="{{ $comment->name }}" class="action-btn btn-restore bs-tooltip"
+                                           data-toggle="tooltip" data-placement="top" aria-label="Delete"
+                                           data-bs-original-title="Geri qaytar">
+                                            <i class="text-warning" data-feather="rotate-ccw"></i>
+                                        </a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -119,6 +123,30 @@
                 });
             })
 
+            $('.btn-verified').on('click', function () {
+                let self = $(this);
+                let id = self.data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.comment.change-verify') }}",
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success : (data) => {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Koment ' + (data.data.is_aprroved ? 'Təsdiqləndi' : 'Təsdiqlənmədi')
+                        })
+
+                        $('#row-'+id).remove();
+                    },
+                    error: () => {
+                        console.log('Ajax Error!')
+                    }
+                });
+            })
+
             $('.btn-delete').on('click', function () {
                 let self = $(this);
                 let id = self.data('id');
@@ -128,7 +156,7 @@
 
                 Swal.fire({
                     title: name,
-                    text:  "Kateqoriyasını silmək istədiyinizə əminsiz?",
+                    text:  "Komentini silmək istədiyinizə əminsiz?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -147,7 +175,21 @@
                             success : (data) => {
                                 if(data.status)
                                 {
-                                    $('#row-'+id).remove();
+                                    $('#row-'+id + ' td:eq(7) div').append(
+                                        `<a href="javascript:void(0);" data-id="${id}" data-name="${name}" class="action-btn btn-restore bs-tooltip"
+                                           data-toggle="tooltip" data-placement="top" aria-label="Delete"
+                                           data-bs-original-title="Geri qaytar">
+                                            <i class="text-warning  feather-icon" data-feather="rotate-ccw"></i>
+                                        </a>`);
+
+                                    $('#row-'+id).addClass('table-secondary');
+
+                                    feather.replace();
+
+                                    let newTooltip = $('#row-' + id + ' td:eq(7) div .btn-restore');
+                                    newTooltip.tooltip();
+
+                                    self.remove();
                                 }
                             },
                             error: () => {
@@ -169,10 +211,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+            $('[data-bs-toggle="tooltip"]').tooltip();
         });
     </script>
 
