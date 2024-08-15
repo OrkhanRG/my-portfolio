@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 //auth
 use App\Http\Controllers\Auth\AuthController;
 //front
@@ -106,6 +107,12 @@ Route::prefix('/admin')->middleware(['auth'])->name('admin.')->group(function ()
     //company
     Route::resource('/company', CompanyController::class);
     Route::post('/company/change-status', [CompanyController::class, 'changeStatus'])->name('company.change-status');
+
+    //comment
+    Route::get('/comment', [AdminCommentController::class, 'comments'])->name('comments');
+    Route::get('/unverified-comment', [AdminCommentController::class, 'unverifiedComments'])->name('unverified-comments');
+    Route::post('/comment/destroy', [AdminCommentController::class, 'destroy'])->name('comment.destroy');
+    Route::post('/comment/change-status', [AdminCommentController::class, 'changeStatus'])->name('comment.change-status');
 });
 
 

@@ -38,7 +38,7 @@
                     <div class="blog-details-wrap">
                         <div class="content mt-35">
                             <div class="blog-meta mb-30 wow fadeInUp delay-0-2s">
-                                <a class="tag" href="{{ route('front.blogs.category', $blog->slug) }}">{{ $blog->category->name ?? '' }}</a>
+                                <a class="tag" href="{{ route('front.blogs.category', $blog->slug) }}">Kateqoriya: <strong class="text-danger">{{ $blog->category->name ?? '' }}</strong></a>
                             </div>
                             <div class="author-date-share mb-40 wow fadeInUp delay-0-4s">
                                 <div class="author">
@@ -192,41 +192,52 @@
                                 <h3 class="comment-title">Şərhlər</h3>
                                 <a href="javascript:void(0)" class="btn btn-warning" data-role="btn-comment-answer" data-comment-id="">Şərh bildir</a>
                             </div>
-                            <div class="comment-body wow fadeInUp delay-0-2s">
-                                <div class="author-thumb">
-                                    <img src="{{ asset('assets/images/blog/comment-author1.jpg') }}" alt="Author">
+
+                            @if(isset($comments) && $comments)
+                                @foreach($comments as $comment)
+                                    <div class="comment-body wow fadeInUp delay-0-2s">
+                                        <div class="author-thumb">
+                                            <img src="{{ asset('assets/images/blog/comment-author1.jpg') }}" alt="Author">
+                                        </div>
+                                        <div class="content">
+                                            <ul class="blog-meta">
+                                                <li>
+                                                    <h6>{{ $comment->name }}</h6>
+                                                </li>
+                                                <li>
+                                                    <a href="#">{{ \Carbon\Carbon::parse($comment->created_at)->locale('az')->translatedFormat('j F, Y') }}</a>
+                                                </li>
+                                            </ul>
+                                            <p>{{ $comment->comment }}</p>
+                                            <a class="read-more" data-role="comment-reply" data-comment-id="2" href="javascript:void(0)">Cavab verin <i class="far fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    @if(isset($comments) && $comments->childComments())
+                                        @foreach($comments->childComments() as $childComment)
+                                            <div class="comment-body comment-child wow fadeInUp delay-0-2s">
+                                                <div class="author-thumb">
+                                                    <img src="{{ asset('assets/images/blog/comment-author2.jpg') }}" alt="Author">
+                                                </div>
+                                                <div class="content">
+                                                    <ul class="blog-meta">
+                                                        <li>
+                                                            <h6>{{ $childComment->name }}</h6>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">{{ \Carbon\Carbon::parse($childComment->created_at)->locale('az')->translatedFormat('j F, Y') }}</a>
+                                                        </li>
+                                                    </ul>
+                                                    <p>{{ $childComment->comment }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @else
+                                <div class="alert alert-primary mt-4 d-flex justify-content-center">
+                                    <p>Hazır heç bir şərh bildirilməmişdir!</p>
                                 </div>
-                                <div class="content">
-                                    <ul class="blog-meta">
-                                        <li>
-                                            <h6>Hülya İsmayılova</h6>
-                                        </li>
-                                        <li>
-                                            <a href="#">May 25, 2023</a>
-                                        </li>
-                                    </ul>
-                                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse molestiae
-                                        consequatur qui dolorem eum fugiat voluptas</p>
-                                    <a class="read-more" data-role="comment-reply" data-comment-id="2" href="javascript:void(0)">Cavab verin <i class="far fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="comment-body comment-child wow fadeInUp delay-0-2s">
-                                <div class="author-thumb">
-                                    <img src="{{ asset('assets/images/blog/comment-author2.jpg') }}" alt="Author">
-                                </div>
-                                <div class="content">
-                                    <ul class="blog-meta">
-                                        <li>
-                                            <h6>Simral İsmayılov</h6>
-                                        </li>
-                                        <li>
-                                            <a href="#">May 25, 2023</a>
-                                        </li>
-                                    </ul>
-                                    <p>At vero eoset accusamus dignissimos ducimus blanditiis sapiente praesentium
-                                        voluptatum deleniti atque</p>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

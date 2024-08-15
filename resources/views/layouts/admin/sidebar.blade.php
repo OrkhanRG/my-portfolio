@@ -232,6 +232,26 @@
                     </div>
                 </a>
             </li>
+
+            <li class="menu">
+                <a href="#comment" data-bs-toggle="collapse" aria-expanded="{{ Route::is('admin.comments', 'admin.unverified-comments') ? 'true' : 'false' }}" class="dropdown-toggle active">
+                    <div class="">
+                        <i data-feather="book"></i>
+                        <span>Kommentlər</span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+                <ul class="collapse submenu list-unstyled {{ Route::is('admin.comments', 'admin.unverified-comments') ? 'show' : '' }}" id="comment" data-bs-parent="#accordionExample">
+                    <li class="{{ Route::is('admin.comments') ? 'active' : '' }}">
+                        <a href="{{ route('admin.comments') }}">Təsdiq olunmuşlar</a>
+                    </li>
+                    <li class="{{ Route::is('admin.unverified-comments') ? 'active' : '' }}">
+                        <a href="{{ route('admin.unverified-comments') }}">Təsdiq olunmamışlar</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </nav>
