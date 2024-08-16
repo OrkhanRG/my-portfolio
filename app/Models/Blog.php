@@ -43,4 +43,9 @@ class Blog extends Model
     {
         return $this->HasMany(BlogImage::class, 'blog_id', 'id');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'blog_id', 'id');
+    }
 }

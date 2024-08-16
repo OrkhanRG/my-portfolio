@@ -199,7 +199,72 @@
 
                         Swal.fire(
                             'Uğurlu!',
-                            `Kateqoriya uğurla silindi!`,
+                            `Koment uğurla silindi!`,
+                            'success',
+                        )
+                    }
+                })
+
+            })
+
+            $('.btn-restore').on('click', function () {
+                let self = $(this);
+                let id = self.data('id');
+                let name = self.data('name');
+                let route = "{{ route('admin.comment.restore', 'test') }}"
+                route = route.replace('test', id);
+
+                Swal.fire({
+                    title: name,
+                    text:  "Komentini geri qaytarmaq istədiyinizə əminsiz?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli!',
+                    cancelButtonText: 'Xeyr!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: route,
+                            type: 'POST',
+                            success : (data) => {
+                                if(data.status)
+                                {
+                                    $('#row-'+id + ' td:eq(7) div').append(
+                                        `<a href="javascript:void(0);" data-id="${id}" data-name="${name}" class="action-btn btn-delete bs-tooltip"
+                                           data-toggle="tooltip" data-placement="top" aria-label="Delete"
+                                           data-bs-original-title="Sil">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="feather feather-trash-2">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </a>`);
+
+                                    $('#row-'+id).removeClass('table-secondary');
+
+                                    feather.replace();
+
+                                    let newTooltip = $('#row-' + id + ' td:eq(7) div .btn-delete');
+                                    newTooltip.tooltip();
+
+                                    self.remove();
+                                }
+                            },
+                            error: () => {
+                                console.log('Ajax Error!')
+                            }
+                        });
+
+                        Swal.fire(
+                            'Uğurlu!',
+                            `Koment geri qaytarıldı!`,
                             'success',
                         )
                     }

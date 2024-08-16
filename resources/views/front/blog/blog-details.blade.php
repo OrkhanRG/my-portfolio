@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'X Blog')
+@section('title', $blog->title ?? '')
 
 @push('css')
 @endpush
@@ -193,11 +193,11 @@
                                 <a href="javascript:void(0)" class="btn btn-warning" data-role="btn-comment-answer" data-comment-id="">Şərh bildir</a>
                             </div>
 
-                            @if(isset($comments) && $comments)
-                                @foreach($comments as $comment)
+                            @if(isset($blog->comments) && $blog->comments)
+                                @foreach($blog->comments as $comment)
                                     <div class="comment-body wow fadeInUp delay-0-2s">
                                         <div class="author-thumb">
-                                            <img src="{{ asset('assets/images/blog/comment-author1.jpg') }}" alt="Author">
+                                            <img src="{{ asset('assets/img/default/user.png') }}" alt="Author">
                                         </div>
                                         <div class="content">
                                             <ul class="blog-meta">
@@ -209,14 +209,14 @@
                                                 </li>
                                             </ul>
                                             <p>{{ $comment->comment }}</p>
-                                            <a class="read-more" data-role="comment-reply" data-comment-id="2" href="javascript:void(0)">Cavab verin <i class="far fa-angle-right"></i></a>
+                                            <a class="read-more" data-role="comment-reply" data-comment-id="{{ $comment->id }}" href="javascript:void(0)">Cavab verin <i class="far fa-angle-right"></i></a>
                                         </div>
                                     </div>
-                                    @if(isset($comments) && $comments->childComments())
-                                        @foreach($comments->childComments() as $childComment)
+                                    @if(isset($comment) && $comment->childComments)
+                                        @foreach($comment->childComments as $childComment)
                                             <div class="comment-body comment-child wow fadeInUp delay-0-2s">
                                                 <div class="author-thumb">
-                                                    <img src="{{ asset('assets/images/blog/comment-author2.jpg') }}" alt="Author">
+                                                    <img src="{{ asset('assets/img/default/user.png') }}" alt="Author">
                                                 </div>
                                                 <div class="content">
                                                     <ul class="blog-meta">

@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'Layihələr')
+@section('title', 'Bloqlar')
 
 @push('css')
 @endpush

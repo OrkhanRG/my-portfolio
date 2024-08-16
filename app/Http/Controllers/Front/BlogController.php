@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
+use App\Models\Comment;
 
 class BlogController extends Controller
 {
@@ -84,7 +85,22 @@ class BlogController extends Controller
 
     public function blogDetails($slug)
     {
-        $blog = Blog::query()->where('slug', $slug)->firstOrFail();
+        $blog = Blog::query()
+            ->with([
+                'comments' => function ($query) {
+                    $query->whereNull('parent_id')
+                        ->where('is_active', 1)
+                        ->where('is_approved', 1)
+                        ->orderBy('created_at', 'desc');
+                },
+                'comments.childComments' => function ($query) {
+                    $query->where('is_approved', 1)
+                        ->where('is_active', 1)
+                        ->orderBy('created_at', 'desc');
+                }
+            ])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $next_blog = Blog::query()
             ->where('status', 1)
@@ -125,6 +141,13 @@ class BlogController extends Controller
             ->where('status', 1)
             ->get();
 
-        return view('front.blog.blog-details', compact('blog', 'latest_blog', 'tags', 'categories', 'next_blog', 'previous_blog'));
+
+        return view('front.blog.blog-details',
+            compact('blog',
+                  'latest_blog',
+                             'tags',
+                             'categories',
+                             'next_blog',
+                             'previous_blog'));
     }
 }
