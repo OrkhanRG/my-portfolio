@@ -39,7 +39,7 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="project-details-content wow fadeInUp delay-0-2s">
                         <h3>Layihə Haqqında</h3>
-                        <p class="big-letter">{{ substr(strip_tags($project->description), 0, 1).strip_tags($project->description) }}</p>
+                        <p class="big-letter">{{ substr(strip_tags($project->description), 0, 1) }}{!! $project->description !!}</p>
                     </div>
                 </div>
                 <div class="col-lg-4 wow fadeInUp delay-0-4s">

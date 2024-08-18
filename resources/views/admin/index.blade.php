@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="widget-content widget-content-area">
-                <form action="{{ route('admin.cv-upload') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('cv-upload') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md">
                         <label class="text-primary" for="cv">CV</label>

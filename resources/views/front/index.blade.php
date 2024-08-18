@@ -17,7 +17,7 @@
                         <p>{!! $about->short_description !!}</p>
                         <div class="hero-btns">
                             <a href="{{ route('front.contact') }}" class="theme-btn">Məni işə götür <i class="far fa-angle-right"></i></a>
-                            <a href="{{ route('admin.cv-download') }}" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
+                            <a href="{{ route('cv-download') }}" class="read-more">CV'mi yüklə <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
