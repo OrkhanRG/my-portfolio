@@ -355,47 +355,49 @@
 
 
     <!-- Projects Area start -->
-    <section class="projects-area pt-130 rpt-100 pb-100 rpb-70 rel z-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-12">
-                    <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                        <span class="sub-title mb-15">Sonuncu Layihələrim</span>
-                        <h2>Populyar <span>Layihələrimi</span> Araşdırın </h2>
+    @if(isset($projects) && $projects)
+        <section class="projects-area pt-130 rpt-100 pb-100 rpb-70 rel z-1">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                            <span class="sub-title mb-15">Sonuncu Layihələrim</span>
+                            <h2>Populyar <span>Layihələrimi</span> Araşdırın </h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @isset($projects)
-                @foreach($projects as $key => $project)
-                    <div class="row align-items-center pb-25">
-                        <div class="col-lg-6 @if($key % 2 == 1) order-lg-2 @endif">
-                            <div class="project-image wow fadeInLeft delay-0-2s">
-                                <img src="{{ asset($project->main_image) }}" alt="Project">
+                @isset($projects)
+                    @foreach($projects as $key => $project)
+                        <div class="row align-items-center pb-25">
+                            <div class="col-lg-6 @if($key % 2 == 1) order-lg-2 @endif">
+                                <div class="project-image wow fadeInLeft delay-0-2s">
+                                    <img src="{{ asset($project->main_image) }}" alt="Project">
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-6 @if($key % 2 == 1) ms-auto @endif">
+                                <div class="project-content wow fadeInRight delay-0-2s">
+                                    <span class="sub-title">{{ $project->category->name }}</span>
+                                    <h2><a href="{{ route('front.project-details', $project->slug) }}">{{ $project->title }}</a></h2>
+                                    <p>{!! $project->short_description !!}</p>
+                                    <a href="{{ route('front.project-details', $project->slug) }}" class="details-btn"><i class="far fa-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-lg-6 @if($key % 2 == 1) ms-auto @endif">
-                            <div class="project-content wow fadeInRight delay-0-2s">
-                                <span class="sub-title">{{ $project->category->name }}</span>
-                                <h2><a href="{{ route('front.project-details', $project->slug) }}">{{ $project->title }}</a></h2>
-                                <p>{!! $project->short_description !!}</p>
-                                <a href="{{ route('front.project-details', $project->slug) }}" class="details-btn"><i class="far fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endisset
-            <div class="project-btn text-center wow fadeInUp delay-0-2s">
-                <a href="{{ route('front.projects') }}" class="theme-btn">Daha çox layihəyə baxın <i class="far fa-angle-right"></i></a>
+                    @endforeach
+                @endisset
+                <div class="project-btn text-center wow fadeInUp delay-0-2s">
+                    <a href="{{ route('front.projects') }}" class="theme-btn">Daha çox layihəyə baxın <i class="far fa-angle-right"></i></a>
+                </div>
             </div>
-        </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
-    </section>
+            <div class="bg-lines">
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+            </div>
+        </section>
+    @endif
     <!-- Projects Area end -->
 
 
@@ -486,52 +488,54 @@
 
 
     <!-- Blog Area start -->
-    <section class="blog-area rel z-1">
-        <div class="for-bgc-black pt-130 pb-100 rpt-100 rpb-70">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-12">
-                        <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
-                            <span class="sub-title mb-15">Xəbərlər & Blog</span>
-                            <h2>Ən Son Xəbərlər & <span>Blog</span></h2>
+    @if(isset($blogs) && $blogs)
+        <section class="blog-area rel z-1">
+            <div class="for-bgc-black pt-130 pb-100 rpt-100 rpb-70">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-12">
+                            <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                                <span class="sub-title mb-15">Xəbərlər & Blog</span>
+                                <h2>Ən Son Xəbərlər & <span>Blog</span></h2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                    <div class="row">
 
-                    @isset($blogs)
-                        @foreach($blogs as $blog)
-                            <div class="col-lg-6">
-                                <div class="blog-item wow fadeInUp delay-0-2s">
-                                    <div class="image">
-                                        <img src="{{ asset($blog->main_image) }}" alt="{{ $blog->title }}">
-                                    </div>
-                                    <div class="content">
-                                        <div class="blog-meta mb-35">
-                                            <a class="tag" href="{{ route('front.blogs.category', $blog->category->name) }}">{{ $blog->category->name }}</a>
+                        @isset($blogs)
+                            @foreach($blogs as $blog)
+                                <div class="col-lg-6">
+                                    <div class="blog-item wow fadeInUp delay-0-2s">
+                                        <div class="image">
+                                            <img src="{{ asset($blog->main_image) }}" alt="{{ $blog->title }}">
                                         </div>
-                                        <h5><a href="{{ route('front.blog-details', $blog->slug) }}">{{ $blog->title }}</a></h5>
-                                        <hr>
-                                        <div class="blog-meta mt-35">
-                                            <a class="date" href="{{ route('front.blog-details', $blog->slug) }}"><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($blog->publish_date)->locale('az')->translatedFormat('j F Y') }}</a>
+                                        <div class="content">
+                                            <div class="blog-meta mb-35">
+                                                <a class="tag" href="{{ route('front.blogs.category', $blog->category->name) }}">{{ $blog->category->name }}</a>
+                                            </div>
+                                            <h5><a href="{{ route('front.blog-details', $blog->slug) }}">{{ $blog->title }}</a></h5>
+                                            <hr>
+                                            <div class="blog-meta mt-35">
+                                                <a class="date" href="{{ route('front.blog-details', $blog->slug) }}"><i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($blog->publish_date)->locale('az')->translatedFormat('j F Y') }}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    @endisset
+                            @endforeach
+                        @endisset
 
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
-    </section>
+            <div class="bg-lines">
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+                <span></span><span></span>
+            </div>
+        </section>
+    @endif
     <!-- Blog Area end -->
 
     <!-- Client Log start -->
